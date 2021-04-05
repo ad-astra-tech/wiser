@@ -8,7 +8,7 @@ def test_set_config():
     """
     GIVEN a valid path to a .yaml file
     WHEN set_config is called
-    THEN massox' loads the config 
+    THEN massox' loads the config
     """
 
     this_script_path = os.path.dirname(os.path.abspath(__file__))
