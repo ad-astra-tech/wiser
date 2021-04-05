@@ -1,6 +1,8 @@
+import yaml
 from box import Box
 
 config = None
+
 
 def set_config(path: str):
     try:
@@ -13,4 +15,6 @@ def set_config(path: str):
 
 
 if config is None:
-    print("Massox configs are None - remember to set the value before to use this package!")
+    print(
+        "Massox configs are None - remember to set the value before to use this package!"
+    )
