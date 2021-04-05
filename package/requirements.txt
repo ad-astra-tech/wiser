@@ -1,0 +1,15 @@
+attrs==20.3.0
+dnspython==2.1.0
+email-validator==1.1.2
+idna==3.1
+iniconfig==1.1.1
+-e git+git@github.com:nicolamassarenti/massox-package.git@9b87e1281412b9db50d54aadfcc79e43a2f351ef#egg=massox&subdirectory=package
+packaging==20.9
+pluggy==0.13.1
+py==1.10.0
+pydantic==1.8.1
+pyparsing==2.4.7
+pytest==6.2.3
+python-box==5.3.0
+toml==0.10.2
+typing-extensions==3.7.4.3
