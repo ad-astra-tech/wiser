@@ -1,7 +1,7 @@
 import os
 import json
 
-class AuthManager:
+class AuthenticationManager:
     def __init__(self):
         self.__auth = None
         self.__is_env = False
