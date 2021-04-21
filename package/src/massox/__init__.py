@@ -1,7 +1,6 @@
 import yaml
 from box import Box
 
-from massox.authentication import authentication
 
 config = None
 

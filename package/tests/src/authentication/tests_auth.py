@@ -14,7 +14,10 @@ def test_get_auth_from_env_variable_with_path():
 
     tmp_file = tempfile.mkstemp()
 
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(tempfile.gettempdir(), tempfile.gettempprefix())
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(
+        tempfile.gettempdir(), tempfile.gettempprefix()
+    )
 
-    authentication_manager = massox.authentication.authentication_manager
+    from massox.authentication.authentication_manager import authentication_manager
+
     assert authentication_manager.is_compiled()
