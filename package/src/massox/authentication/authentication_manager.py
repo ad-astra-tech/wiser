@@ -1,6 +1,7 @@
 import os
 import json
 
+
 class AuthenticationManager:
     def __init__(self):
         self.__auth = None
@@ -22,6 +23,7 @@ class AuthenticationManager:
             # Checking again if exists env variable
             self.__set_from_env_variable()
 
-        return  self.__auth != None
+        return self.__auth != None
+
 
 authentication_manager = AuthenticationManager()
