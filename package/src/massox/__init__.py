@@ -1,6 +1,12 @@
+import yaml
 from box import Box
 
+from massox.authentication import authentication
+
 config = None
+
+# TODO: SET LOGGING
+
 
 def set_config(path: str):
     try:
@@ -13,4 +19,6 @@ def set_config(path: str):
 
 
 if config is None:
-    print("Massox configs are None - remember to set the value before to use this package!")
+    print(
+        "Configs value is None - remember to set the value before using this package!"
+    )
