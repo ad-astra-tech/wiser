@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class DataExtensions(Enum):
+class DataExtension(Enum):
     JSON = ".json"
     NUMPY = ".npy"
     CSV = ".csv"
