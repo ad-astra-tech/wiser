@@ -1,5 +1,7 @@
 from __future__ import annotations
-import os
+
+from pathlib import Path
+from builtins import property
 
 
 class StorageLocation:
@@ -8,27 +10,33 @@ class StorageLocation:
     ):
         self._prefix = prefix
         self._bucket = bucket
-        self._blob_name = blob_name
-        self._folders = folders
+        self._blob_name = str(Path(blob_name))
+        self._folders = str(Path(folders))
         self._filename = filename
 
-    def get_prefix(self):
+    @property
+    def prefix(self):
         return self._prefix
 
-    def get_bucket(self):
+    @property
+    def bucket(self):
         return self._bucket
 
-    def get_folders(self):
+    @property
+    def folders(self):
         return self._folders
 
-    def get_filename(self):
+    @property
+    def filename(self):
         return self._filename
 
-    def get_blob_name(self):
+    @property
+    def blob_name(self):
         return self._blob_name
 
-    def get_complete_path(self):
-        return os.path.join(self._prefix, self._bucket, self._blob_name)
+    @property
+    def complete_path(self):
+        return str(Path(self._prefix).joinpath(self._bucket).joinpath(self._blob_name))
 
 
 class StorageLocationBuilder:
@@ -58,7 +66,9 @@ class StorageLocationBuilder:
             raise ValueError("Blob name not set")
 
         # Getting filename from blob_name
-        folders, filename = self._blob_name.split("/")
+        values = self._blob_name.split("/")
+        filename = values[-1]
+        folders = "/".join(values[:-1])
 
         return StorageLocation(
             prefix=self._prefix,

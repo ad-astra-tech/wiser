@@ -52,9 +52,9 @@ def test_location_builder_returns_storage_location():
         .build()
     )
 
-    assert storage_location.get_prefix() == prefix
-    assert storage_location.get_bucket() == bucket
-    assert storage_location.get_folders() == folders
-    assert storage_location.get_filename() == filename
-    assert storage_location.get_blob_name() == blob_name
-    assert storage_location.get_complete_path() == complete_path
+    assert storage_location.prefix == prefix
+    assert storage_location.bucket == bucket
+    assert storage_location.folders == folders
+    assert storage_location.filename == filename
+    assert storage_location.blob_name == blob_name
+    assert storage_location.complete_path == complete_path
