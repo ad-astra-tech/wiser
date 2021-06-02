@@ -34,7 +34,8 @@ class GCloudStorageHandler:
         if location.filename.endswith(DataExtension.NUMPY.value):
             obj = obj.astype("float64")
             data = obj.tostring()
-
+        elif location.filename.endswith(DataExtension.TEXT.value):
+            data = obj
         elif location.filename.endswith(DataExtension.JSON.value):
             data = json.dumps(obj)
         else:

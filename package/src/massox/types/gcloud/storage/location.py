@@ -66,7 +66,9 @@ class StorageLocationBuilder:
             raise ValueError("Blob name not set")
 
         # Getting filename from blob_name
-        folders, filename = self._blob_name.split("/")
+        values = self._blob_name.split("/")
+        filename = values[-1]
+        folders = "/".join(values[:-1])
 
         return StorageLocation(
             prefix=self._prefix,
