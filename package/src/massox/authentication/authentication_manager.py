@@ -2,6 +2,7 @@ import os
 import json
 
 
+
 class AuthenticationManager:
     def __init__(self):
         self.__auth = None
