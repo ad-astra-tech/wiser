@@ -2,9 +2,9 @@ import json
 
 from pathlib import Path
 
-from massox.connectors.gcloud.storage.client import gcloud_storage_client
-from massox.types.gcloud.storage.location import StorageLocation, StorageLocationBuilder
-from massox.types.data.extensions import DataExtension
+from massox.gcloud.connectors import gcloud_storage_client
+from massox.gcloud.types.storage.location import StorageLocation, StorageLocationBuilder
+from massox.gcloud.types.data.extensions import DataExtension
 
 
 class GCloudStorageHandler:

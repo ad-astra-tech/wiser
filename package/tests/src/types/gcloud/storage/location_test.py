@@ -8,7 +8,7 @@ def test_location_builder_no_bucket_raises_valueerror():
     THEN a value error is raised
     """
 
-    from massox.types.gcloud.storage.location import StorageLocationBuilder
+    from massox.gcloud.types.storage import StorageLocationBuilder
 
     with pytest.raises(ValueError):
         StorageLocationBuilder().set_blob_name(
@@ -23,7 +23,7 @@ def test_location_builder_no_blobname_raises_valueerror():
     THEN a value error is raised
     """
 
-    from massox.types.gcloud.storage.location import StorageLocationBuilder
+    from massox.gcloud.types.storage import StorageLocationBuilder
 
     with pytest.raises(ValueError):
         StorageLocationBuilder().set_bucket(bucket="bucket_name").build()
@@ -36,7 +36,7 @@ def test_location_builder_returns_storage_location():
     THEN a storage location object is returned
     """
 
-    from massox.types.gcloud.storage.location import StorageLocationBuilder
+    from massox.gcloud.types.storage import StorageLocationBuilder
 
     prefix = "gs://"
     bucket = "bucket_name"
