@@ -1,42 +1,39 @@
 from __future__ import annotations
+from pydantic import BaseModel, Field
 
 from pathlib import Path
-from builtins import property
 
 
 class StorageLocation:
-    def __init__(
-        self, prefix: str, bucket: str, blob_name: str, folders: str, filename: str
-    ):
+    def __init__(self, prefix: str, bucket: str, blob_name: str, folders: str, filename: str):
         self._prefix = prefix
         self._bucket = bucket
-        self._blob_name = str(Path(blob_name))
-        self._folders = str(Path(folders))
+        self._blob_name = blob_name
+        self._folders = folders
         self._filename = filename
 
     @property
-    def prefix(self):
-        return self._prefix
-
-    @property
-    def bucket(self):
-        return self._bucket
-
-    @property
-    def folders(self):
-        return self._folders
-
-    @property
-    def filename(self):
+    def filename(self) -> str:
         return self._filename
 
     @property
-    def blob_name(self):
+    def folders(self) -> str:
+        return self._folders
+
+    @property
+    def blob_name(self) -> str:
         return self._blob_name
 
     @property
+    def bucket(self) -> str:
+        return self._bucket
+
+    @property
+    def prefix(self) -> str:
+        return self._prefix
+
     def complete_path(self):
-        return str(Path(self._prefix).joinpath(self._bucket).joinpath(self._blob_name))
+        return str(self.prefix) + str(Path(self.bucket).joinpath(self.blob_name))
 
 
 class StorageLocationBuilder:
@@ -66,9 +63,12 @@ class StorageLocationBuilder:
             raise ValueError("Blob name not set")
 
         # Getting filename from blob_name
-        values = self._blob_name.split("/")
-        filename = values[-1]
-        folders = "/".join(values[:-1])
+        filename = None
+        folders = self._blob_name
+        if "." in Path(self._blob_name).name:
+            values = self._blob_name.split("/")
+            filename = values[-1]
+            folders = "/".join(values[:-1])
 
         return StorageLocation(
             prefix=self._prefix,
