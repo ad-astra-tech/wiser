@@ -4,7 +4,9 @@ from pathlib import Path
 
 
 class StorageLocation:
-    def __init__(self, prefix: str, bucket: str, blob_name: str, folders: str, filename: str):
+    def __init__(
+        self, prefix: str, bucket: str, blob_name: str, folders: str, filename: str
+    ):
         self._prefix = prefix
         self._bucket = bucket
         self._blob_name = blob_name
