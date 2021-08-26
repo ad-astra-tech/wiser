@@ -1,13 +1,10 @@
 from google.cloud import storage
+from src.connectors.gcloud.credentials import credentials
 
 
-class GCloudStorageConnector:
+class StorageConnector:
     def __init__(self):
-        self._name = "GCloudStorageConnector"
-        self._client = storage.Client()
-
-    def __str__(self):
-        return self._name
+        self._client = storage.Client(credentials=credentials)
 
     def upload_from_string(
         self, data: bytes, bucket_name: str, destination_blob_name: str
@@ -16,11 +13,19 @@ class GCloudStorageConnector:
             blob_name=destination_blob_name
         ).upload_from_string(data=data)
 
+    def upload_from_filename(
+        self, source_file_name: str, bucket_name: str, destination_blob_name: str
+    ):
+        self._client.bucket(bucket_name=bucket_name).blob(
+            blob_name=destination_blob_name
+        ).upload_from_filename(filename=source_file_name)
+
     def download_as_string(self, bucket_name: str, source_blob_name: str):
         return (
             self._client.bucket(bucket_name=bucket_name)
             .blob(blob_name=source_blob_name)
-            .download_as_string()
+            .download_as_bytes()
+            .decode("utf-8")
         )
 
     def exists(self, bucket_name: str, source_blob_name: str):
@@ -52,7 +57,11 @@ class GCloudStorageConnector:
         )
 
     def delete(self, bucket_name: str, blob_name: str):
-        self._client.bucket(bucket_name=bucket_name).blob(blob_name=blob_name).delete()
+        return (
+            self._client.bucket(bucket_name=bucket_name)
+            .blob(blob_name=blob_name)
+            .delete()
+        )
 
 
-gcloud_storage_client = GCloudStorageConnector()
+client = StorageConnector()
