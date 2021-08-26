@@ -1,5 +1,5 @@
 from google.cloud import storage
-from src.connectors.gcloud.credentials import credentials
+from massox.connectors.gcloud.credentials import credentials
 
 
 class StorageConnector:
