@@ -1,7 +1,4 @@
 import os
-import pytest
-
-import massox
 
 
 def test_save():
@@ -17,7 +14,7 @@ def test_save():
     ] = "/home/nicolamassarenti/Documents/Progetti/massox-package/service-account.json"
 
     # Defining location
-    from massox.types.gcloud.storage.location import StorageLocationBuilder
+    from massox.gcloud.types.storage import StorageLocationBuilder
 
     cloud_location = (
         StorageLocationBuilder()
