@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Dict
 
 from google.cloud.bigquery.dataset import DatasetReference
@@ -27,11 +29,13 @@ class BigQueryDatasetReferenceBuilder:
         self._project_id = None
         self._dataset_id = None
 
-    def set_project_id(self, project_id: str) -> None:
+    def set_project_id(self, project_id: str) -> BigQueryDatasetReferenceBuilder:
         self._project_id = project_id
+        return self
 
-    def set_dataset_id(self, dataset_id: str) -> None:
+    def set_dataset_id(self, dataset_id: str) -> BigQueryDatasetReferenceBuilder:
         self._dataset_id = dataset_id
+        return self
 
     def build(self) -> BigQueryDatasetReference:
         if self._dataset_id is None:
