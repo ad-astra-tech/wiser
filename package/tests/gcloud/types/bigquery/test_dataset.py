@@ -1,5 +1,6 @@
 import pytest
 
+
 def test_dataset_reference_builder_no_project_id_raises_valueerror():
     """
     GIVEN BigQueryDatasetReferenceBuilder
@@ -13,6 +14,7 @@ def test_dataset_reference_builder_no_project_id_raises_valueerror():
         BigQueryDatasetReferenceBuilder().set_dataset_id(
             dataset_id="fake_dataset_id"
         ).build()
+
 
 def test_dataset_reference_builder_no_dataset_id_raises_valueerror():
     """
@@ -28,6 +30,7 @@ def test_dataset_reference_builder_no_dataset_id_raises_valueerror():
             project_id="fake_project_id"
         ).build()
 
+
 def test_dataset_reference_builder_return_dataset_reference():
     """
     GIVEN BigQueryDatasetReferenceBuilder
@@ -36,15 +39,21 @@ def test_dataset_reference_builder_return_dataset_reference():
     """
 
     from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
+    from google.cloud.bigquery.dataset import DatasetReference
 
     project_id = "fake_project_id"
     dataset_id = "fake_dataset_id"
 
-    dataset_reference = BigQueryDatasetReferenceBuilder().set_project_id(
-        project_id=project_id
-    ).set_dataset_id(
-        dataset_id=dataset_id
-    ).build()
+    dataset_reference = (
+        BigQueryDatasetReferenceBuilder()
+        .set_project_id(project_id=project_id)
+        .set_dataset_id(dataset_id=dataset_id)
+        .build()
+    )
 
     assert dataset_reference.dataset_id == dataset_id
     assert dataset_reference.project_id == project_id
+    assert (
+        dataset_reference.to_api_repr()
+        == DatasetReference(project=project_id, dataset_id=dataset_id).to_api_repr()
+    )
