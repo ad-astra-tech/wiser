@@ -10,7 +10,9 @@ class BigQueryDatasetReference:
         self._dataset_id = dataset_id
         self._project_id = project_id
 
-        self._dataset_reference = DatasetReference(project=project_id, dataset_id=dataset_id)
+        self._dataset_reference = DatasetReference(
+            project=project_id, dataset_id=dataset_id
+        )
 
     @property
     def dataset_id(self) -> str:
@@ -19,6 +21,10 @@ class BigQueryDatasetReference:
     @property
     def project_id(self) -> str:
         return self._project_id
+
+    @property
+    def dataset_reference(self) -> DatasetReference:
+        return self._dataset_reference
 
     def to_api_repr(self) -> Dict[str, str]:
         return self._dataset_reference.to_api_repr()
