@@ -13,7 +13,6 @@ def test_table_reference_builder_no_table_id_raises_value_error():
 
     dataset_id = "fake_dataset_id"
     project_id = "fake_project_id"
-    table_id = "fake_table_id"
 
     dataset_reference = (
         BigQueryDatasetReferenceBuilder()
