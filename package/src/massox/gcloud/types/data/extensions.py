@@ -1,4 +1,3 @@
-
 class FileExtension:
     JSON = ".json"
     NUMPY = ".npy"

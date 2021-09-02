@@ -1,19 +1,21 @@
-import pytest
+import unittest
 
-def test_extensions():
-    """
-    GIVEN FileExtension
-    WHEN  the class attributes are checked
-    THEN the value is the expected one
-    """
-    from massox.gcloud.types.data.extensions import FileExtension
 
-    numpy_extension = ".npy"
-    json_extension = ".json"
-    csv_extension = ".csv"
-    text_extension = ".txt"
+class ExtensionTest(unittest.TestCase):
+    def test_extensions(self):
+        """
+        GIVEN FileExtension
+        WHEN  the class attributes are checked
+        THEN the value is the expected one
+        """
+        from massox.gcloud.types.data.extensions import FileExtension
 
-    assert FileExtension.TEXT == text_extension
-    assert FileExtension.JSON == json_extension
-    assert FileExtension.CSV == csv_extension
-    assert FileExtension.NUMPY == numpy_extension
+        numpy_extension = ".npy"
+        json_extension = ".json"
+        csv_extension = ".csv"
+        text_extension = ".txt"
+
+        self.assertEqual(FileExtension.TEXT, text_extension)
+        self.assertEqual(FileExtension.JSON, json_extension)
+        self.assertEqual(FileExtension.CSV, csv_extension)
+        self.assertEqual(FileExtension.NUMPY, numpy_extension)
