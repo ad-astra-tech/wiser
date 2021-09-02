@@ -1,8 +1,7 @@
 import unittest
 
+
 class BigQueryJobConfigTest(unittest.TestCase):
-
-
     def test_query_job_config_builder_no_write_disposition_raises_value_error(self):
         """
         GIVEN BigQueryQueryJobConfigBuilder
@@ -10,7 +9,9 @@ class BigQueryJobConfigTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.bigquery.job_config import BigQueryQueryJobConfigBuilder
+        from massox.gcloud.types.bigquery.job_config import (
+            BigQueryQueryJobConfigBuilder,
+        )
         from massox.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
         from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
 
@@ -37,7 +38,6 @@ class BigQueryJobConfigTest(unittest.TestCase):
                 destination=table_reference
             ).build()
 
-
     def test_query_job_config_builder_no_destination_raises_value_error(self):
         """
         GIVEN BigQueryQueryJobConfigBuilder
@@ -45,14 +45,15 @@ class BigQueryJobConfigTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.bigquery.job_config import BigQueryQueryJobConfigBuilder
+        from massox.gcloud.types.bigquery.job_config import (
+            BigQueryQueryJobConfigBuilder,
+        )
         from google.cloud.bigquery.job import WriteDisposition
 
         with self.assertRaises(ValueError):
             BigQueryQueryJobConfigBuilder().set_write_disposition(
                 write_disposition=WriteDisposition.WRITE_TRUNCATE
             ).build()
-
 
     def test_query_job_config_builder_returns_query_job_config(self):
         """
@@ -62,7 +63,9 @@ class BigQueryJobConfigTest(unittest.TestCase):
         """
 
         from google.cloud.bigquery.job import WriteDisposition
-        from massox.gcloud.types.bigquery.job_config import BigQueryQueryJobConfigBuilder
+        from massox.gcloud.types.bigquery.job_config import (
+            BigQueryQueryJobConfigBuilder,
+        )
         from massox.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
         from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
         from google.cloud.bigquery.job import QueryJobConfig
@@ -98,5 +101,5 @@ class BigQueryJobConfigTest(unittest.TestCase):
             job_config.job_config.to_api_repr(),
             QueryJobConfig(
                 destination=table_reference, write_disposition=write_disposition
-            ).to_api_repr()
+            ).to_api_repr(),
         )

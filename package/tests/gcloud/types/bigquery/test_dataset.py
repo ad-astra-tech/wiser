@@ -1,7 +1,7 @@
 import unittest
 
-class BigQueryDatasetReferenceTest(unittest.TestCase):
 
+class BigQueryDatasetReferenceTest(unittest.TestCase):
     def test_dataset_reference_builder_no_project_id_raises_valueerror(self):
         """
         GIVEN BigQueryDatasetReferenceBuilder
@@ -16,7 +16,6 @@ class BigQueryDatasetReferenceTest(unittest.TestCase):
                 dataset_id="fake_dataset_id"
             ).build()
 
-
     def test_dataset_reference_builder_no_dataset_id_raises_valueerror(self):
         """
         GIVEN BigQueryDatasetReferenceBuilder
@@ -30,7 +29,6 @@ class BigQueryDatasetReferenceTest(unittest.TestCase):
             BigQueryDatasetReferenceBuilder().set_project_id(
                 project_id="fake_project_id"
             ).build()
-
 
     def test_dataset_reference_builder_return_dataset_reference(self):
         """
@@ -56,5 +54,5 @@ class BigQueryDatasetReferenceTest(unittest.TestCase):
         self.assertEqual(dataset_reference.project_id, project_id)
         self.assertEqual(
             dataset_reference.to_api_repr(),
-            DatasetReference(project=project_id, dataset_id=dataset_id).to_api_repr()
+            DatasetReference(project=project_id, dataset_id=dataset_id).to_api_repr(),
         )
