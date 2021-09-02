@@ -19,10 +19,10 @@ class StorageHandler:
             bucket_name=location.bucket, source_blob_name=location.blob_name
         )
 
-        if location.filename.endswith(FileExtension.NUMPY.value):
+        if location.filename.endswith(FileExtension.NUMPY):
             return np.frombuffer(data, dtype=np.float64)
 
-        elif location.filename.endswith(FileExtension.JSON.value):
+        elif location.filename.endswith(FileExtension.JSON):
             return json.loads(data)
         else:
             NotImplementedError("File extension not managed")
@@ -30,12 +30,12 @@ class StorageHandler:
 
     @staticmethod
     def save(obj, location: StorageLocation = None):
-        if location.filename.endswith(FileExtension.NUMPY.value):
+        if location.filename.endswith(FileExtension.NUMPY):
             obj = obj.astype("float64")
             data = obj.tostring()
-        elif location.filename.endswith(FileExtension.TEXT.value):
+        elif location.filename.endswith(FileExtension.TEXT):
             data = obj
-        elif location.filename.endswith(FileExtension.JSON.value):
+        elif location.filename.endswith(FileExtension.JSON):
             data = json.dumps(obj)
         else:
             NotImplementedError("File extension not managed")
