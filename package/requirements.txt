@@ -12,7 +12,8 @@ google-resumable-media==2.0.1
 googleapis-common-protos==1.53.0
 grpcio==1.39.0
 idna==3.2
--e git+git@github.com:nicolamassarenti/massox-package.git@ef3b59189a871ba8bfd4e764ebe2b7f36eee49e2#egg=massox&subdirectory=package
+-e git+git@github.com:nicolamassarenti/massox-package.git@22f78c7bfe042f0b106c5420e038838e875eeca3#egg=massox&subdirectory=package
+mock==4.0.3
 packaging==21.0
 proto-plus==1.19.0
 protobuf==3.17.3
