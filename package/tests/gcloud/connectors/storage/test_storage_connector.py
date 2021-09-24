@@ -83,9 +83,10 @@ class StorageConnectorTest(unittest.TestCase):
         source_blob_name = "source_blob_name"
         data = bytes("This is the content of source_blob_name".encode(encoding="utf-8"))
 
-        BlobMock.return_value = data
-        print(BlobMock.return_value)
-        print(StorageConnector.download_as_string(bucket_name=BUCKET_NAME, source_blob_name=source_blob_name))
+        # Mocking functions
+        ClientMock.return_value.bucket.return_value = self._get_bucket(client=ClientMock, name=BUCKET_NAME)
+        BlobMock.download_as_string.return_value = data
+
         self.assertEqual(
             StorageConnector.download_as_string(bucket_name=BUCKET_NAME, source_blob_name=source_blob_name), data
         )
