@@ -71,22 +71,23 @@ class StorageConnectorTest(unittest.TestCase):
 
 
     @patch("google.cloud.storage.Client")
-    @patch("google.cloud.storage.Bucket")
-    @patch("google.cloud.storage.Blob")
+    @patch("google.cloud.storage.bucket.Bucket")
+    @patch("google.cloud.storage.blob.Blob")
     def test_download_as_string(self, BlobMock, BucketMock, ClientMock):
         from massox.gcloud.connectors.storage._storage_connector import StorageConnector
 
         self.assertIs(ClientMock, google.cloud.storage.Client)
-        self.assertIs(BucketMock, google.cloud.storage.Bucket)
-        self.assertIs(BlobMock, google.cloud.storage.Blob)
+        self.assertIs(BucketMock, google.cloud.storage.bucket.Bucket)
+        self.assertIs(BlobMock, google.cloud.storage.blob.Blob)
 
         source_blob_name = "source_blob_name"
         data = bytes("This is the content of source_blob_name".encode(encoding="utf-8"))
 
         # Mocking functions
         ClientMock.return_value.bucket.return_value = self._get_bucket(client=ClientMock, name=BUCKET_NAME)
-        BlobMock.download_as_string.return_value = data
+        BucketMock.return_value.blob.return_value = self._get_blob(blob_name=source_blob_name, bucket=ClientMock.return_value.bucket)
+        BlobMock.return_value.download_as_bytes.return_value = data
 
         self.assertEqual(
-            StorageConnector.download_as_string(bucket_name=BUCKET_NAME, source_blob_name=source_blob_name), data
+            StorageConnector.download_as_string(bucket_name=BUCKET_NAME, source_blob_name=source_blob_name), data.decode("utf-8")
         )
