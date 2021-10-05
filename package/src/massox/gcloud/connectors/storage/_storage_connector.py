@@ -5,7 +5,9 @@ from google.cloud import storage
 
 class StorageConnector:
     @staticmethod
-    def upload_from_string(data: bytes, bucket_name: str, destination_blob_name: str) -> None:
+    def upload_from_string(
+        data: bytes, bucket_name: str, destination_blob_name: str
+    ) -> None:
         """
         Uploads data to the specified bucket with the specified blob name
 
@@ -62,13 +64,9 @@ class StorageConnector:
         @return: the content of the blob as a string
         """
 
-        return (
-            StorageConnector.download_as_bytes(
-                bucket_name=bucket_name,
-                source_blob_name=source_blob_name
-            )
-            .decode("utf-8")
-        )
+        return StorageConnector.download_as_bytes(
+            bucket_name=bucket_name, source_blob_name=source_blob_name
+        ).decode("utf-8")
 
     @staticmethod
     def exists(bucket_name: str, source_blob_name: str) -> bool:
@@ -88,7 +86,9 @@ class StorageConnector:
         )
 
     @staticmethod
-    def list_blobs(bucket_name: str, prefix: str = None, delimiter: str = None) -> List[str]:
+    def list_blobs(
+        bucket_name: str, prefix: str = None, delimiter: str = None
+    ) -> List[str]:
         """
 
         @param bucket_name: the source bucket name
