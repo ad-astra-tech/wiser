@@ -10,13 +10,27 @@ BLOB_NAME = "BLOB"
 
 class StorageConnectorTest(unittest.TestCase):
     @staticmethod
-    def _get_bucket(client: google.cloud.storage.Client, name: str):
+    def _get_bucket(client: google.cloud.storage.Client, name: str) -> google.cloud.storage.bucket.Bucket:
+        """
+        Returns a bucket
+
+        @param client: a client to Google Cloud Storage
+        @param name: the bucket name
+        @return: a Bucket
+        """
         from google.cloud.storage.bucket import Bucket
 
         return Bucket(client=client, name=name)
 
     @staticmethod
     def _get_blob(blob_name: str, bucket: google.cloud.storage.Bucket):
+        """
+        Returns a blob
+
+        @param blob_name: the blob name
+        @param bucket:  the bucket name
+        @return:
+        """
         from google.cloud.storage.blob import Blob
 
         return Blob(bucket=bucket, name=blob_name)
@@ -25,6 +39,11 @@ class StorageConnectorTest(unittest.TestCase):
     @patch("google.cloud.storage.Bucket")
     @patch("google.cloud.storage.Blob")
     def test_upload_from_string(self, BlobMock, BucketMock, ClientMock):
+        """
+        GIVEN   the StorageConnector
+        WHEN    data in bytes format is passed to function `upload_from_string`
+        THEN    None is returned
+        """
         from massox.gcloud.connectors.storage._storage_connector import StorageConnector
 
         filename = "filename"
@@ -43,6 +62,11 @@ class StorageConnectorTest(unittest.TestCase):
     @patch("google.cloud.storage.bucket.Bucket")
     @patch("google.cloud.storage.blob.Blob")
     def test_download_as_string(self, BlobMock, BucketMock, ClientMock):
+        """
+        GIVEN   a bucket and a blob name
+        WHEN    is used function `download_as_string`
+        THEN    the content of data is retrieved
+        """
         from massox.gcloud.connectors.storage._storage_connector import StorageConnector
 
         self.assertIs(ClientMock, google.cloud.storage.Client)
