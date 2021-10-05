@@ -90,6 +90,7 @@ class StorageConnector:
         bucket_name: str, prefix: str = None, delimiter: str = None
     ) -> List[str]:
         """
+        Returns the list of the blob names
 
         @param bucket_name: the source bucket name
         @param prefix: prefix to filter blobs
