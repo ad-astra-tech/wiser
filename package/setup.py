@@ -11,7 +11,7 @@ setuptools.setup(
     description="Package distribution with several utilities for GCP connections, managing and other.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/nicolamassarenti/massox-package",
+    url="https://github.com/nicolamassarenti/massox",
     project_urls={
         "Bug Tracker": "https://github.com/nicolamassarenti/massox-package/issues",
     },
