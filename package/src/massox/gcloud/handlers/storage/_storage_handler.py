@@ -15,6 +15,9 @@ class StorageHandler:
 
     @staticmethod
     def get(location: StorageLocation = None):
+        if location.blob_name is None:
+            raise ValueError("No blob name given")
+
         data = StorageConnector.download_as_string(
             bucket_name=location.bucket, source_blob_name=location.blob_name
         )
