@@ -24,7 +24,6 @@ StorageHandler.save(obj=sentence, location=location)
 location = (
     StorageLocationBuilder()
     .set_bucket(bucket=BUCKET_NAME)
-    .set_blob_name(blob_name="/")
     .build()
 )
 
