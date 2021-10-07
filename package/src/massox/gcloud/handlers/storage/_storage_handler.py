@@ -62,21 +62,20 @@ class StorageHandler:
             bucket_name=location.bucket, prefix=location.folders
         )
 
-        location_list = []
-        for blob in blobs:
-            if blob.name == location.folders:
+        locations_list = []
+        for blob_name in blobs:
+            if blob_name == location.folders:
                 # blob is the folder, not a file
                 continue
-            blob_name = str(Path(location.folders).joinpath(blob.name.split("/")[-1]))
             base_location = (
                 StorageLocationBuilder()
-                .set_prefix(prefix=location.prefix)
                 .set_bucket(bucket=location.bucket)
                 .set_blob_name(blob_name=blob_name)
+                .build()
             )
-            location_list.append(base_location)
+            locations_list.append(base_location)
 
-        return location_list
+        return locations_list
 
     @staticmethod
     def move(
