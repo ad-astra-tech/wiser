@@ -21,10 +21,5 @@ StorageHandler.save(obj=sentence, location=location)
 ########################################################################################################################
 # Listing blobs ########################################################################################################
 ########################################################################################################################
-location = (
-    StorageLocationBuilder()
-    .set_bucket(bucket=BUCKET_NAME)
-    .build()
-)
-
+location = StorageLocationBuilder().set_bucket(bucket=BUCKET_NAME).build()
 blobs = StorageHandler.get_list_content(location=location)
