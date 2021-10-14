@@ -98,17 +98,16 @@ class StorageConnector:
         @return: list of blob names that match the arguments
         """
 
-        blobs = list(
-            storage.Client()
-            .bucket(bucket_name=bucket_name)
-            .list_blobs(prefix=prefix, delimiter=delimiter)
+        client = storage.Client()
+        blobs = storage.Bucket(client=client, name=bucket_name).list_blobs(
+            prefix=prefix, delimiter=delimiter
         )
 
-        locations = []
+        blobs_names = []
         for blob in blobs:
-            locations.append(blob.name)
+            blobs_names.append(blob.name)
 
-        return locations
+        return blobs_names
 
     @staticmethod
     def copy(
