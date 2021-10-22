@@ -16,17 +16,23 @@ class StorageLocationTest(unittest.TestCase):
                 blob_name="folder_a/folder_b/filename"
             ).build()
 
-    def test_location_builder_no_blobname_raises_valueerror(self):
+    def test_location_builder_no_blob_name_returns_a_valid_location(self):
         """
-        GIVEN StorageLocationBuilder
-        WHEN  the blob name is not set
-        THEN a value error is raised
+        GIVEN   LocationBuilder
+        WHEN    no blob_name is injected
+        THEN    a valid location is returned
         """
 
         from massox.gcloud.types.storage.location import StorageLocationBuilder
 
-        with self.assertRaises(ValueError):
-            StorageLocationBuilder().set_bucket(bucket="bucket_name").build()
+        location = StorageLocationBuilder().set_bucket(bucket="bucket").build()
+
+        self.assertEqual(location.blob_name, None)
+        self.assertEqual(location.folders, None)
+        self.assertEqual(location.filename, None)
+        self.assertEqual(location.bucket, "bucket")
+        self.assertEqual(location.prefix, "gs://")
+        self.assertEqual(location.complete_path(), "gs://bucket/")
 
     def test_location_builder_returns_storage_location(self):
         """

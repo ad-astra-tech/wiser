@@ -77,6 +77,25 @@ class StorageConnectorTest(unittest.TestCase):
             )
         )
 
+    @patch("google.cloud.storage.Bucket.list_blobs")
+    def test_list_blobs(self, list_blobs_mock, client_mock):
+        """
+        GIVEN   the StorageConnector
+        WHEN    list blobs invoked
+        THEN    a list of blob names is returned
+        """
+        from massox.gcloud.connectors.storage import StorageConnector
+
+        bucket = self._get_bucket(client=client_mock, name="BUCKET")
+        blob_names = ["path/to/blob/1.ext", "path/to/blob/2.ext"]
+        blobs_stubs = []
+        for blob_name in blob_names:
+            blobs_stubs.append(self._get_blob(blob_name=blob_name, bucket=bucket))
+
+        list_blobs_mock.return_value = blobs_stubs
+
+        self.assertEqual(blob_names, StorageConnector.list_blobs(bucket_name="BUCKET"))
+
     @patch("google.cloud.storage.Blob.exists")
     def test_exists_returns_True(self, exists_mock):
         """
