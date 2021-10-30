@@ -77,8 +77,9 @@ class StorageConnectorTest(unittest.TestCase):
             )
         )
 
-    @patch("google.cloud.storage.Bucket.list_blobs")
-    def test_list_blobs(self, list_blobs_mock, client_mock):
+    @patch("google.cloud.storage.Client")
+    @patch("google.cloud.storage.Bucket")
+    def test_list_blobs(self, bucket_mock, client_mock):
         """
         GIVEN   the StorageConnector
         WHEN    list blobs invoked
@@ -92,7 +93,7 @@ class StorageConnectorTest(unittest.TestCase):
         for blob_name in blob_names:
             blobs_stubs.append(self._get_blob(blob_name=blob_name, bucket=bucket))
 
-        list_blobs_mock.return_value = blobs_stubs
+        bucket_mock.return_value.list_blobs.return_value = iter(blobs_stubs)
 
         self.assertEqual(blob_names, StorageConnector.list_blobs(bucket_name="BUCKET"))
 
