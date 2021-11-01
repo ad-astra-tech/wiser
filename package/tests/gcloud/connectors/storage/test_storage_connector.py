@@ -178,3 +178,49 @@ class StorageConnectorTest(unittest.TestCase):
             ),
             data.decode("utf-8"),
         )
+
+
+    @patch("google.cloud.storage.Client")
+    def test_copy_returns_none(self, client_mock):
+        """
+        GIVEN   a source and a destination bucket and blob names
+        WHEN    is called function `copy`
+        THEN    None is returned
+        """
+        from massox.gcloud.connectors.storage import StorageConnector
+
+        source_bucket = "source_bucket"
+        source_blob_name = "source_blob_name"
+        destination_bucket = "destination_bucket"
+        destination_blob_name = "destination_blob_name"
+
+        client_mock.return_value.bucket.return_value.copy_blob.return_value = None
+
+        self.assertIsNone(StorageConnector.copy(
+            source_bucket_name=source_bucket,
+            source_blob_name=source_blob_name,
+            dest_bucket_name=destination_bucket,
+            dest_blob_name=destination_blob_name
+        ))
+
+
+
+    @patch("google.cloud.storage.Client")
+    def test_delete_returns_none(self, client_mock):
+        """
+        GIVEN   a source and a destination bucket and blob names
+        WHEN    is called function `delete`
+        THEN    None is returned
+        """
+        from massox.gcloud.connectors.storage import StorageConnector
+
+        bucket = "source_bucket"
+        blob = "source_blob_name"
+
+        client_mock.return_value.bucket.return_value.blob.return_value.delete.return_value = None
+
+        self.assertIsNone(StorageConnector.delete(
+            bucket_name=bucket,
+            blob_name=blob
+        ))
+
