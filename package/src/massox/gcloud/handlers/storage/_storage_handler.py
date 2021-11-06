@@ -1,6 +1,6 @@
 import json
 
-from tempfile import NamedTemporaryFile
+from tempfile import TemporaryFile, NamedTemporaryFile
 
 import numpy as np
 
@@ -19,10 +19,14 @@ class StorageHandler:
             raise ValueError("No blob name given")
 
         if location.filename.endswith(FileExtension.NUMPY):
-            data = StorageConnector.download_as_bytes(
-                bucket_name=location.bucket, source_blob_name=location.blob_name
+            tmp_file = NamedTemporaryFile()
+            StorageConnector.download_to_filename(
+                filename=tmp_file.name,
+                bucket_name=location.bucket,
+                source_blob_name=location.blob_name,
             )
-            return np.frombuffer(data, dtype=np.float64)
+            tmp_file.seek(0)
+            return np.load(tmp_file)
 
         elif location.filename.endswith(FileExtension.JSON):
             data = StorageConnector.download_as_string(
@@ -41,10 +45,11 @@ class StorageHandler:
     @staticmethod
     def save(obj, location: StorageLocation = None):
         if location.filename.endswith(FileExtension.NUMPY):
-            tmp_file = NamedTemporaryFile()
-            np.save(file=tmp_file, arr=obj)
-            StorageConnector.upload_from_filename(
-                source_file_name=tmp_file.name,
+            tmp_file = TemporaryFile()
+            np.save(tmp_file, obj)
+            tmp_file.seek(0)
+            StorageConnector.upload_from_file(
+                tmp_file,
                 bucket_name=location.bucket,
                 destination_blob_name=location.blob_name,
             )

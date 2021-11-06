@@ -1,6 +1,7 @@
 from typing import List
 
 from google.cloud import storage
+from typing import TextIO, BinaryIO, Union
 
 
 class StorageConnector:
@@ -22,8 +23,10 @@ class StorageConnector:
         ).upload_from_string(data=data)
 
     @staticmethod
-    def upload_from_filename(
-        source_file_name: str, bucket_name: str, destination_blob_name: str
+    def upload_from_file(
+        file_handle: Union[TextIO, BinaryIO],
+        bucket_name: str,
+        destination_blob_name: str,
     ) -> None:
         """
         Uploads data from filename
@@ -35,7 +38,7 @@ class StorageConnector:
         """
         storage.Client().bucket(bucket_name=bucket_name).blob(
             blob_name=destination_blob_name
-        ).upload_from_filename(filename=source_file_name)
+        ).upload_from_file(file_handle)
 
     @staticmethod
     def download_as_bytes(bucket_name: str, source_blob_name: str) -> bytes:
@@ -67,6 +70,26 @@ class StorageConnector:
         return StorageConnector.download_as_bytes(
             bucket_name=bucket_name, source_blob_name=source_blob_name
         ).decode("utf-8")
+
+    @staticmethod
+    def download_to_filename(
+        filename: str, bucket_name: str, source_blob_name: str
+    ) -> None:
+        """
+        Returns the content of a blob to a filename
+
+        @param filename: the name of the file
+        @param bucket_name: the source bucket name
+        @param source_blob_name: the source blob name
+        @return: the content of the blob as a string
+        """
+
+        (
+            storage.Client()
+            .bucket(bucket_name=bucket_name)
+            .blob(blob_name=source_blob_name)
+            .download_to_filename(filename=filename)
+        )
 
     @staticmethod
     def exists(bucket_name: str, source_blob_name: str) -> bool:
