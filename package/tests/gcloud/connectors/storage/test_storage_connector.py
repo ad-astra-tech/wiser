@@ -56,7 +56,7 @@ class StorageConnectorTest(unittest.TestCase):
             )
         )
 
-    @patch("google.cloud.storage.Blob.upload_from_filename")
+    @patch("google.cloud.storage.Blob.upload_from_file")
     def test_upload_from_filename(self, upload_from_filename_mock):
         """
         GIVEN   the StorageConnector
