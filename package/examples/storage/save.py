@@ -1,5 +1,7 @@
 import os
 
+import numpy as np
+
 from massox.gcloud.handlers.storage import StorageHandler
 from massox.gcloud.types.storage.location import StorageLocationBuilder
 
@@ -18,6 +20,8 @@ location = (
 )
 StorageHandler.save(obj=sentence, location=location)
 
+location = StorageLocationBuilder().set_bucket(bucket=BUCKET_NAME).set_blob_name(blob_name="folder_a/data.npy").build()
+StorageHandler.save(obj=np.array([[1,2,3],[1,2,3]]), location=location)
 ########################################################################################################################
 # Listing blobs ########################################################################################################
 ########################################################################################################################
