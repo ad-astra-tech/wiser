@@ -1,6 +1,6 @@
 import json
 
-from pathlib import Path
+from tempfile import TemporaryFile, NamedTemporaryFile
 
 import numpy as np
 
@@ -18,15 +18,26 @@ class StorageHandler:
         if location.blob_name is None:
             raise ValueError("No blob name given")
 
-        data = StorageConnector.download_as_string(
-            bucket_name=location.bucket, source_blob_name=location.blob_name
-        )
-
         if location.filename.endswith(FileExtension.NUMPY):
-            return np.frombuffer(data, dtype=np.float64)
+            tmp_file = NamedTemporaryFile()
+            StorageConnector.download_to_filename(
+                filename=tmp_file.name,
+                bucket_name=location.bucket,
+                source_blob_name=location.blob_name,
+            )
+            tmp_file.seek(0)
+            return np.load(tmp_file)
 
         elif location.filename.endswith(FileExtension.JSON):
+            data = StorageConnector.download_as_string(
+                bucket_name=location.bucket, source_blob_name=location.blob_name
+            )
             return json.loads(data)
+        elif location.filename.endswith(FileExtension.TEXT):
+            data = StorageConnector.download_as_string(
+                bucket_name=location.bucket, source_blob_name=location.blob_name
+            )
+            return data
         else:
             NotImplementedError("File extension not managed")
             return
@@ -34,21 +45,33 @@ class StorageHandler:
     @staticmethod
     def save(obj, location: StorageLocation = None):
         if location.filename.endswith(FileExtension.NUMPY):
-            obj = obj.astype("float64")
-            data = obj.tostring()
+            tmp_file = TemporaryFile()
+            np.save(tmp_file, obj)
+            tmp_file.seek(0)
+            StorageConnector.upload_from_file(
+                tmp_file,
+                bucket_name=location.bucket,
+                destination_blob_name=location.blob_name,
+            )
+            tmp_file.close()
+
         elif location.filename.endswith(FileExtension.TEXT):
             data = obj
+            StorageConnector.upload_from_string(
+                data=data,
+                bucket_name=location.bucket,
+                destination_blob_name=location.blob_name,
+            )
         elif location.filename.endswith(FileExtension.JSON):
-            data = json.dumps(obj)
+            data = json.dumps(obj=obj, sort_keys=True, indent=4, ensure_ascii=False)
+            StorageConnector.upload_from_string(
+                data=data,
+                bucket_name=location.bucket,
+                destination_blob_name=location.blob_name,
+            )
         else:
             NotImplementedError("File extension not managed")
             return
-
-        StorageConnector.upload_from_string(
-            data=data,
-            bucket_name=location.bucket,
-            destination_blob_name=location.blob_name,
-        )
 
     @staticmethod
     def exists(location: StorageLocation = None):
