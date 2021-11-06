@@ -9,7 +9,7 @@ from massox.gcloud.types.storage.location import StorageLocation, StorageLocatio
 from massox.gcloud.types.data.extensions import FileExtension
 
 
-class StorageHandler:
+class Storage:
     def __str__(self):
         return "Google Cloud Storage Handler"
 

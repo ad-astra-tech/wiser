@@ -1,1 +1,1 @@
-from massox.gcloud.connectors.storage._storage_connector import StorageConnector
+from massox.gcloud.connectors.storage.storage_connector import StorageConnector
