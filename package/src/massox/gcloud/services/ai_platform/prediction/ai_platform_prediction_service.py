@@ -3,7 +3,7 @@ import googleapiclient.discovery
 from google.api_core.client_options import ClientOptions
 
 
-class AIPlatformPredictionHandler:
+class AIPlatformPrediction:
     @staticmethod
     def predict(
         project_id: str, endpoint: str, model_name: str, body: dict, version: str = None

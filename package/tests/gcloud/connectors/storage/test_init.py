@@ -11,7 +11,7 @@ class TestStorageInitModule(unittest.TestCase):
         from massox.gcloud.connectors.storage import (
             StorageConnector as InitStorageConnector,
         )
-        from massox.gcloud.connectors.storage._storage_connector import (
+        from massox.gcloud.connectors.storage.storage_connector import (
             StorageConnector as ScriptStorageConnector,
         )
 
