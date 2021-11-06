@@ -7,7 +7,7 @@ from typing import TextIO, BinaryIO, Union
 class StorageConnector:
     @staticmethod
     def upload_from_string(
-        data: bytes, bucket_name: str, destination_blob_name: str
+        data: Union[bytes, str], bucket_name: str, destination_blob_name: str
     ) -> None:
         """
         Uploads data to the specified bucket with the specified blob name

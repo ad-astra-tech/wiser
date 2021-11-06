@@ -25,3 +25,16 @@ location = (
     .build()
 )
 StorageHandler.save(obj=np.array([[1, 2, 3], [1, 2, 3]]), location=location)
+
+# JSON
+data = {
+    "key_1": "value_1",
+    "key_2": "value_2"
+}
+location = (
+    StorageLocationBuilder()
+    .set_bucket(bucket=BUCKET_NAME)
+    .set_blob_name(blob_name="folder_a/folder_c/data.json")
+    .build()
+)
+StorageHandler.save(obj=data, location=location)

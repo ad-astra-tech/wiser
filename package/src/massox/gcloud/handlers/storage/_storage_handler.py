@@ -63,7 +63,7 @@ class StorageHandler:
                 destination_blob_name=location.blob_name,
             )
         elif location.filename.endswith(FileExtension.JSON):
-            data = json.dumps(obj)
+            data = json.dumps(obj=obj, sort_keys=True, indent=4, ensure_ascii=False)
             StorageConnector.upload_from_string(
                 data=data,
                 bucket_name=location.bucket,
