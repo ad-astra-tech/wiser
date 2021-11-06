@@ -64,16 +64,16 @@ class StorageConnectorTest(unittest.TestCase):
         THEN    None is returned
         """
         from massox.gcloud.connectors.storage import StorageConnector
-
-        filename = "filename"
+        from tempfile import TemporaryFile
+        tmp_file = TemporaryFile()
 
         upload_from_filename_mock.return_value = None
 
         self.assertIsNone(
-            StorageConnector.upload_from_filename(
-                source_file_name=filename,
+            StorageConnector.upload_from_file(
+                file_handle=tmp_file,
                 bucket_name=BUCKET_NAME,
-                destination_blob_name=filename,
+                destination_blob_name="filename",
             )
         )
 
