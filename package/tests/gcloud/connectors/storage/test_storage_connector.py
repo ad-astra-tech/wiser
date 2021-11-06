@@ -179,7 +179,6 @@ class StorageConnectorTest(unittest.TestCase):
             data.decode("utf-8"),
         )
 
-
     @patch("google.cloud.storage.Client")
     def test_copy_returns_none(self, client_mock):
         """
@@ -196,14 +195,14 @@ class StorageConnectorTest(unittest.TestCase):
 
         client_mock.return_value.bucket.return_value.copy_blob.return_value = None
 
-        self.assertIsNone(StorageConnector.copy(
-            source_bucket_name=source_bucket,
-            source_blob_name=source_blob_name,
-            dest_bucket_name=destination_bucket,
-            dest_blob_name=destination_blob_name
-        ))
-
-
+        self.assertIsNone(
+            StorageConnector.copy(
+                source_bucket_name=source_bucket,
+                source_blob_name=source_blob_name,
+                dest_bucket_name=destination_bucket,
+                dest_blob_name=destination_blob_name,
+            )
+        )
 
     @patch("google.cloud.storage.Client")
     def test_delete_returns_none(self, client_mock):
@@ -217,10 +216,8 @@ class StorageConnectorTest(unittest.TestCase):
         bucket = "source_bucket"
         blob = "source_blob_name"
 
-        client_mock.return_value.bucket.return_value.blob.return_value.delete.return_value = None
+        client_mock.return_value.bucket.return_value.blob.return_value.delete.return_value = (
+            None
+        )
 
-        self.assertIsNone(StorageConnector.delete(
-            bucket_name=bucket,
-            blob_name=blob
-        ))
-
+        self.assertIsNone(StorageConnector.delete(bucket_name=bucket, blob_name=blob))
