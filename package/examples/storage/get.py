@@ -1,6 +1,6 @@
 import os
 
-from massox.gcloud.handlers.storage import StorageHandler
+from massox.gcloud.services.storage import Storage
 from massox.gcloud.types.storage.location import StorageLocationBuilder
 
 BUCKET_NAME = os.getenv("BUCKET_NAME")
@@ -12,7 +12,7 @@ location = (
     .set_blob_name(blob_name="folder_a/folder_b/sentence.txt")
     .build()
 )
-text = StorageHandler.get(location=location)
+text = Storage.get(location=location)
 
 # Numpy array
 location = (
@@ -21,7 +21,7 @@ location = (
     .set_blob_name(blob_name="folder_a/data.npy")
     .build()
 )
-array = StorageHandler.get(location=location)
+array = Storage.get(location=location)
 
 # JSON
 location = (
@@ -31,4 +31,4 @@ location = (
     .build()
 )
 
-data = StorageHandler.get(location=location)
+data = Storage.get(location=location)
