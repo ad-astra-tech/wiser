@@ -8,20 +8,21 @@ from massox.gcloud.types.storage.location import StorageLocationBuilder
 BUCKET_NAME = os.getenv("BUCKET_NAME")
 
 # Text
-sentence = "This is a sentence I want to upload on Google Cloud Storage"
-location = (
+text_location = (
     StorageLocationBuilder()
     .set_bucket(bucket=BUCKET_NAME)
     .set_blob_name(blob_name="folder_a/folder_b/sentence.txt")
     .build()
 )
-StorageHandler.save(obj=sentence, location=location)
+text = StorageHandler.get(location=text_location)
 
 # Numpy array
-location = (
+np_location = (
     StorageLocationBuilder()
     .set_bucket(bucket=BUCKET_NAME)
     .set_blob_name(blob_name="folder_a/data.npy")
     .build()
 )
-StorageHandler.save(obj=np.array([[1, 2, 3], [1, 2, 3]]), location=location)
+array = StorageHandler.get(location=np_location)
+
+print("A")
