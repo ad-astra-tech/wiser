@@ -1,6 +1,6 @@
 import json
 
-from pathlib import Path
+from tempfile import TemporaryFile, NamedTemporaryFile
 
 import numpy as np
 
@@ -15,37 +15,63 @@ class StorageHandler:
 
     @staticmethod
     def get(location: StorageLocation = None):
-        data = StorageConnector.download_as_string(
-            bucket_name=location.bucket, source_blob_name=location.blob_name
-        )
+        if location.blob_name is None:
+            raise ValueError("No blob name given")
 
-        if location.filename.endswith(FileExtension.NUMPY.value):
-            return np.frombuffer(data, dtype=np.float64)
+        if location.filename.endswith(FileExtension.NUMPY):
+            tmp_file = NamedTemporaryFile()
+            StorageConnector.download_to_filename(
+                filename=tmp_file.name,
+                bucket_name=location.bucket,
+                source_blob_name=location.blob_name,
+            )
+            tmp_file.seek(0)
+            return np.load(tmp_file)
 
-        elif location.filename.endswith(FileExtension.JSON.value):
+        elif location.filename.endswith(FileExtension.JSON):
+            data = StorageConnector.download_as_string(
+                bucket_name=location.bucket, source_blob_name=location.blob_name
+            )
             return json.loads(data)
+        elif location.filename.endswith(FileExtension.TEXT):
+            data = StorageConnector.download_as_string(
+                bucket_name=location.bucket, source_blob_name=location.blob_name
+            )
+            return data
         else:
             NotImplementedError("File extension not managed")
             return
 
     @staticmethod
     def save(obj, location: StorageLocation = None):
-        if location.filename.endswith(FileExtension.NUMPY.value):
-            obj = obj.astype("float64")
-            data = obj.tostring()
-        elif location.filename.endswith(FileExtension.TEXT.value):
+        if location.filename.endswith(FileExtension.NUMPY):
+            tmp_file = TemporaryFile()
+            np.save(tmp_file, obj)
+            tmp_file.seek(0)
+            StorageConnector.upload_from_file(
+                tmp_file,
+                bucket_name=location.bucket,
+                destination_blob_name=location.blob_name,
+            )
+            tmp_file.close()
+
+        elif location.filename.endswith(FileExtension.TEXT):
             data = obj
-        elif location.filename.endswith(FileExtension.JSON.value):
-            data = json.dumps(obj)
+            StorageConnector.upload_from_string(
+                data=data,
+                bucket_name=location.bucket,
+                destination_blob_name=location.blob_name,
+            )
+        elif location.filename.endswith(FileExtension.JSON):
+            data = json.dumps(obj=obj, sort_keys=True, indent=4, ensure_ascii=False)
+            StorageConnector.upload_from_string(
+                data=data,
+                bucket_name=location.bucket,
+                destination_blob_name=location.blob_name,
+            )
         else:
             NotImplementedError("File extension not managed")
             return
-
-        StorageConnector.upload_from_string(
-            data=data,
-            bucket_name=location.bucket,
-            destination_blob_name=location.blob_name,
-        )
 
     @staticmethod
     def exists(location: StorageLocation = None):
@@ -59,21 +85,20 @@ class StorageHandler:
             bucket_name=location.bucket, prefix=location.folders
         )
 
-        location_list = []
-        for blob in blobs:
-            if blob.name == location.folders:
+        locations_list = []
+        for blob_name in blobs:
+            if blob_name == location.folders:
                 # blob is the folder, not a file
                 continue
-            blob_name = str(Path(location.folders).joinpath(blob.name.split("/")[-1]))
             base_location = (
                 StorageLocationBuilder()
-                .set_prefix(prefix=location.prefix)
                 .set_bucket(bucket=location.bucket)
                 .set_blob_name(blob_name=blob_name)
+                .build()
             )
-            location_list.append(base_location)
+            locations_list.append(base_location)
 
-        return location_list
+        return locations_list
 
     @staticmethod
     def move(
