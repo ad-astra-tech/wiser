@@ -9,8 +9,8 @@ class BigQueryReferenceTableTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
-        from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
+        from wiser.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
+        from wiser.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
 
         dataset_id = "fake_dataset_id"
         project_id = "fake_project_id"
@@ -33,7 +33,7 @@ class BigQueryReferenceTableTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
+        from wiser.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
 
         table_id = "fake_table_id"
 
@@ -47,8 +47,8 @@ class BigQueryReferenceTableTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
-        from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
+        from wiser.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
+        from wiser.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
         from google.cloud.bigquery.table import TableReference
 
         dataset_id = "fake_dataset_id"

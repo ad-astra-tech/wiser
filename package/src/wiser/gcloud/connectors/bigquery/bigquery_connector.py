@@ -2,8 +2,8 @@ from typing import List, Dict, Optional, Any
 
 from google.cloud import bigquery
 
-from massox.gcloud.types.bigquery.table import BigQueryTableReference
-from massox.gcloud.types.bigquery.job_config import BigQueryQueryJobConfig
+from wiser.gcloud.types.bigquery.table import BigQueryTableReference
+from wiser.gcloud.types.bigquery.job_config import BigQueryQueryJobConfig
 
 
 class BigQueryConnector:

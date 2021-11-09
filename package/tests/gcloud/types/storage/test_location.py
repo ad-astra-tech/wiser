@@ -9,7 +9,7 @@ class StorageLocationTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.storage.location import StorageLocationBuilder
+        from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
         with self.assertRaises(ValueError):
             StorageLocationBuilder().set_blob_name(
@@ -23,7 +23,7 @@ class StorageLocationTest(unittest.TestCase):
         THEN    a valid location is returned
         """
 
-        from massox.gcloud.types.storage.location import StorageLocationBuilder
+        from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
         location = StorageLocationBuilder().set_bucket(bucket="bucket").build()
 
@@ -41,7 +41,7 @@ class StorageLocationTest(unittest.TestCase):
         THEN a fully featured storage location object is returned
         """
 
-        from massox.gcloud.types.storage.location import StorageLocationBuilder
+        from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
         prefix = "gs://"
         bucket = "bucket_name"

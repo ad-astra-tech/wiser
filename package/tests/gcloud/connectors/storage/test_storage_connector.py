@@ -44,7 +44,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    data in bytes format is passed to function `upload_from_string`
         THEN    None is returned
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         filename = "filename"
         data = bytes("hello".encode(encoding="utf-8"))
@@ -63,7 +63,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    data in bytes format is passed to function `upload_from_filename`
         THEN    None is returned
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
         from tempfile import TemporaryFile
         tmp_file = TemporaryFile()
 
@@ -85,7 +85,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    list blobs invoked
         THEN    a list of blob names is returned
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         bucket = self._get_bucket(client=client_mock, name="BUCKET")
         blob_names = ["path/to/blob/1.ext", "path/to/blob/2.ext"]
@@ -104,7 +104,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    is checked whether exists a blob that exists
         THEN    True is returned
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         blob_name = "blob_that_exists"
 
@@ -124,7 +124,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    is checked whether exists a blob that exists
         THEN    False is returned
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         blob_name = "blob_that_does_not_exist"
 
@@ -144,7 +144,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    is used function `download_as_bytes`
         THEN    the content of data is retrieved
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         source_blob_name = "source_blob_name"
         data = bytes("This is the content of source_blob_name".encode(encoding="utf-8"))
@@ -166,7 +166,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    is used function `download_as_string`
         THEN    the content of data is retrieved
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         source_blob_name = "source_blob_name"
         data = bytes("This is the content of source_blob_name".encode(encoding="utf-8"))
@@ -186,7 +186,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    is called function `copy`
         THEN    None is returned
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         source_bucket = "source_bucket"
         source_blob_name = "source_blob_name"
@@ -211,7 +211,7 @@ class StorageConnectorTest(unittest.TestCase):
         WHEN    is called function `delete`
         THEN    None is returned
         """
-        from massox.gcloud.connectors.storage import StorageConnector
+        from wiser.gcloud.connectors.storage import StorageConnector
 
         bucket = "source_bucket"
         blob = "source_blob_name"

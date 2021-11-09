@@ -8,10 +8,10 @@ class TestStorageInitModule(unittest.TestCase):
         WHEN it's imported massox.gcloud.connectors.storage._storage_connector import StorageConnector
         THEN the types are the same
         """
-        from massox.gcloud.connectors.storage import (
+        from wiser.gcloud.connectors.storage import (
             StorageConnector as InitStorageConnector,
         )
-        from massox.gcloud.connectors.storage.storage_connector import (
+        from wiser.gcloud.connectors.storage.storage_connector import (
             StorageConnector as ScriptStorageConnector,
         )
 
