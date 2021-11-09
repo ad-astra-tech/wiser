@@ -1,1 +1,0 @@
-from massox.gcloud.connectors.bigquery.bigquery_connector import BigQueryConnector

@@ -3,7 +3,7 @@ from __future__ import annotations
 from google.cloud.bigquery.job import QueryJobConfig
 from google.cloud.bigquery.job import WriteDisposition
 
-from massox.gcloud.types.bigquery.table import BigQueryTableReference
+from wiser.gcloud.types.bigquery.table import BigQueryTableReference
 
 
 class BigQueryQueryJobConfig:

@@ -1,7 +1,7 @@
 import os
 
-from massox.gcloud.services.storage import Storage
-from massox.gcloud.types.storage.location import StorageLocationBuilder
+from wiser.gcloud.services.storage import Storage
+from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
 BUCKET_NAME = os.getenv("BUCKET_NAME")
 
