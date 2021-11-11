@@ -6,6 +6,7 @@ from wiser.gcloud.services.storage import Storage
 from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
 BUCKET_NAME = os.getenv("BUCKET_NAME")
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="path/to/service-account.json"
 
 # Text
 sentence = "This is a sentence I want to upload on Google Cloud Storage"
