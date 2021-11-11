@@ -19,7 +19,7 @@ _Wiser_ can be installed by running `pip install wiser`. It requires Python 3.8+
 _Wiser_ comes with several examples: you can find them in the [examples folder](https://github.com/nicolamassarenti/wiser/tree/main/package/examples/). A brief examples of the services currently supported is shown in the following.
 
 #### Google Cloud Storage
-GCP Storage supported types are: `.txt`, `.json`, `.npy`.
+GCP Storage supported types are: `.txt`, `.json`, `.npy`. Below is shown some examples of the `get()` and `save()` APIs.
 ```python
 import os
 import numpy as np
@@ -63,7 +63,7 @@ Development guidelines are:
     
 ## Testing
 The adopted testing framework is [`unittest`](https://docs.python.org/3/library/unittest.html). To evaluate tests coverage is 
-used ['coverage'](https://coverage.readthedocs.io/en/6.1.2/). 
+used [`coverage`](https://coverage.readthedocs.io/en/6.1.2/). 
 
 To run unit tests execute:
 ```shell
