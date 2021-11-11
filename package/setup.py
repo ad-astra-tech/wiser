@@ -6,14 +6,14 @@ CURRENT_DIR = Path(__file__).parent
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-# Read requirements
-requirements_file = CURRENT_DIR.joinpath("requirements.txt")
-with open(requirements_file, "r") as f:
-    requirements = f.read().splitlines()
+requirements=[
+    "numpy>=1.20.0",
+    "google-cloud-storage>=1.42.0",
+]
 
 setuptools.setup(
     name="wiser",
-    version="0.0.2",
+    version="0.0.3",
     author="Nicola Massarenti",
     author_email="nicola.massarenti@gmail.com",
     description="A python package designed to free the developers from the burden of common operations with cloud technologies.",
