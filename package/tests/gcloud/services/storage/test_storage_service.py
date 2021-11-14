@@ -20,8 +20,7 @@ class StorageServiceTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             Storage.get(location=location)
 
-
-    @patch("massox.gcloud.connectors.storage.StorageConnector.download_as_string")
+    @patch("wiser.gcloud.connectors.storage.StorageConnector.download_as_string")
     def test_get_string(self, storage_connector_mock):
         """
         GIVEN   a valid location
@@ -43,7 +42,7 @@ class StorageServiceTest(unittest.TestCase):
 
         self.assertEqual(Storage.get(location=location), data)
 
-    @patch("massox.gcloud.connectors.storage.StorageConnector.download_as_string")
+    @patch("wiser.gcloud.connectors.storage.StorageConnector.download_as_string")
     def test_get_json(self, storage_connector_mock):
         """
         GIVEN   a valid location
@@ -61,10 +60,9 @@ class StorageServiceTest(unittest.TestCase):
             .build()
         )
 
-        data = {
-            "1": "a",
-            "2": "b"
-        }
-        storage_connector_mock.return_value = json.dumps(obj=data, sort_keys=True, indent=4, ensure_ascii=False)
+        data = {"1": "a", "2": "b"}
+        storage_connector_mock.return_value = json.dumps(
+            obj=data, sort_keys=True, indent=4, ensure_ascii=False
+        )
 
         self.assertEqual(Storage.get(location=location), data)

@@ -1,5 +1,7 @@
 class FileExtension:
+    CSV = ".csv"
+    JPG = ".jpg"
     JSON = ".json"
     NUMPY = ".npy"
-    CSV = ".csv"
+    PNG = ".png"
     TEXT = ".txt"

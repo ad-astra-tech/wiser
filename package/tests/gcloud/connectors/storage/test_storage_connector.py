@@ -65,6 +65,7 @@ class StorageConnectorTest(unittest.TestCase):
         """
         from wiser.gcloud.connectors.storage import StorageConnector
         from tempfile import TemporaryFile
+
         tmp_file = TemporaryFile()
 
         upload_from_filename_mock.return_value = None

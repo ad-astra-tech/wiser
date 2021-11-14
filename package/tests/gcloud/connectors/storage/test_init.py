@@ -4,8 +4,8 @@ import unittest
 class TestStorageInitModule(unittest.TestCase):
     def test_storage_connector_init(self):
         """
-        GIVEN the import massox.gcloud.connectors.storage import StorageConnector
-        WHEN it's imported massox.gcloud.connectors.storage._storage_connector import StorageConnector
+        GIVEN the import wiser.gcloud.connectors.storage import StorageConnector
+        WHEN it's imported wiser.gcloud.connectors.storage._storage_connector import StorageConnector
         THEN the types are the same
         """
         from wiser.gcloud.connectors.storage import (
