@@ -31,14 +31,9 @@ class Storage:
         elif location.filename.endswith(
             FileExtension.JPG
         ) or location.filename.endswith(FileExtension.PNG):
-            tmp_file = NamedTemporaryFile()
-            StorageConnector.download_to_filename(
-                filename=tmp_file.name,
-                bucket_name=location.bucket,
-                source_blob_name=location.blob_name,
+            return StorageConnector.download_as_bytes(
+                bucket_name=location.bucket, source_blob_name=location.blob_name
             )
-            tmp_file.seek(0)
-            return np.load(tmp_file)
 
         elif location.filename.endswith(FileExtension.JSON):
             data = StorageConnector.download_as_string(

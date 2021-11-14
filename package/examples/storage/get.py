@@ -1,5 +1,6 @@
 import os
-
+import io
+from PIL import Image
 from wiser.gcloud.services.storage import Storage
 from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
@@ -33,3 +34,15 @@ location = (
 )
 
 data = Storage.get(location=location)
+
+# JPG, PNG
+image_path = os.environ["IMAGE_PATH"]
+
+location = (
+    StorageLocationBuilder()
+    .set_bucket(bucket=BUCKET_NAME)
+    .set_blob_name(blob_name="folder_a/data.jpg")
+    .build()
+)
+
+image = Image.open(io.BytesIO(Storage.get(location=location)))
