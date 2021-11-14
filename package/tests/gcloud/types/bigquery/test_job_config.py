@@ -9,11 +9,11 @@ class BigQueryJobConfigTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.bigquery.job_config import (
+        from wiser.gcloud.types.bigquery.job_config import (
             BigQueryQueryJobConfigBuilder,
         )
-        from massox.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
-        from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
+        from wiser.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
+        from wiser.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
 
         dataset_id = "fake_dataset_id"
         project_id = "fake_project_id"
@@ -45,7 +45,7 @@ class BigQueryJobConfigTest(unittest.TestCase):
         THEN a value error is raised
         """
 
-        from massox.gcloud.types.bigquery.job_config import (
+        from wiser.gcloud.types.bigquery.job_config import (
             BigQueryQueryJobConfigBuilder,
         )
         from google.cloud.bigquery.job import WriteDisposition
@@ -63,11 +63,11 @@ class BigQueryJobConfigTest(unittest.TestCase):
         """
 
         from google.cloud.bigquery.job import WriteDisposition
-        from massox.gcloud.types.bigquery.job_config import (
+        from wiser.gcloud.types.bigquery.job_config import (
             BigQueryQueryJobConfigBuilder,
         )
-        from massox.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
-        from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
+        from wiser.gcloud.types.bigquery.table import BigQueryTableReferenceBuilder
+        from wiser.gcloud.types.bigquery.dataset import BigQueryDatasetReferenceBuilder
         from google.cloud.bigquery.job import QueryJobConfig
 
         dataset_id = "fake_dataset_id"

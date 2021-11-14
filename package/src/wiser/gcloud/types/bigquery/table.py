@@ -4,7 +4,7 @@ from typing import Dict, Any
 
 from google.cloud.bigquery.table import TableReference
 
-from massox.gcloud.types.bigquery.dataset import BigQueryDatasetReference
+from wiser.gcloud.types.bigquery.dataset import BigQueryDatasetReference
 
 
 class BigQueryTableReference:

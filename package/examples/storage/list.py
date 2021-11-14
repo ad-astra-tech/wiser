@@ -1,9 +1,10 @@
 import os
 
-from massox.gcloud.services.storage import Storage
-from massox.gcloud.types.storage.location import StorageLocationBuilder
+from wiser.gcloud.services.storage import Storage
+from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
 BUCKET_NAME = os.getenv("BUCKET_NAME")
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="path/to/service-account.json"
 
 # Listing content of a bucket
 location = StorageLocationBuilder().set_bucket(bucket=BUCKET_NAME).build()

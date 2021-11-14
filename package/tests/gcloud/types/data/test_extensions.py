@@ -8,7 +8,7 @@ class ExtensionTest(unittest.TestCase):
         WHEN  the class attributes are checked
         THEN the value is the expected one
         """
-        from massox.gcloud.types.data.extensions import FileExtension
+        from wiser.gcloud.types.data.extensions import FileExtension
 
         numpy_extension = ".npy"
         json_extension = ".json"

@@ -1,0 +1,1 @@
+from wiser.gcloud.connectors.bigquery.bigquery_connector import BigQueryConnector

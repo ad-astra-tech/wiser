@@ -12,8 +12,8 @@ class StorageServiceTest(unittest.TestCase):
         WHEN    if invoked `get()` method
         THEN    value error is raised
         """
-        from massox.gcloud.services.storage import Storage
-        from massox.gcloud.types.storage.location import StorageLocationBuilder
+        from wiser.gcloud.services.storage import Storage
+        from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
         location = StorageLocationBuilder().set_bucket(bucket=BUCKET).build()
 
@@ -28,8 +28,8 @@ class StorageServiceTest(unittest.TestCase):
         WHEN    the blob refers to a string
         THEN    the expected string is returned
         """
-        from massox.gcloud.services.storage import Storage
-        from massox.gcloud.types.storage.location import StorageLocationBuilder
+        from wiser.gcloud.services.storage import Storage
+        from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
         location = (
             StorageLocationBuilder()
@@ -51,8 +51,8 @@ class StorageServiceTest(unittest.TestCase):
         THEN    the expected json is returned
         """
         import json
-        from massox.gcloud.services.storage import Storage
-        from massox.gcloud.types.storage.location import StorageLocationBuilder
+        from wiser.gcloud.services.storage import Storage
+        from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
         location = (
             StorageLocationBuilder()
