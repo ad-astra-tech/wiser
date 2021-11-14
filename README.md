@@ -19,33 +19,51 @@ _Wiser_ can be installed by running `pip install wiser`. It requires Python 3.8+
 _Wiser_ comes with several examples: you can find them in the [examples folder](https://github.com/nicolamassarenti/wiser/tree/main/package/examples/). A brief examples of the services currently supported is shown in the following.
 
 #### Google Cloud Storage
-GCP Storage supported types are: `.txt`, `.json`, `.npy`. Below is shown some examples of the `get()` and `save()` APIs.
+GCP Storage supported types are: `.txt`, `.json`, `.npy`, `.jpg` and `.png`. Below is shown some examples of the `get()` and `save()` APIs.
+
 ```python
+import io
 import os
 import numpy as np
+from PIL import Image
 from wiser.gcloud.services.storage import Storage
 from wiser.gcloud.types.storage.location import StorageLocationBuilder
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="path/to/service-account.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/service-account.json"
 
 location = (
     StorageLocationBuilder()
-    .set_bucket(bucket="BUCKET_NAME")
-    .set_blob_name(blob_name="path/to/sentence.txt")
-    .build()
+        .set_bucket(bucket="BUCKET_NAME")
+        .set_blob_name(blob_name="path/to/sentence.txt")
+        .build()
 )
 text = Storage.get(location=location)
 
-
 location = (
     StorageLocationBuilder()
-    .set_bucket(bucket=BUCKET_NAME)
-    .set_blob_name(blob_name="path/to/array.npy")
-    .build()
+        .set_bucket(bucket=BUCKET_NAME)
+        .set_blob_name(blob_name="path/to/array.npy")
+        .build()
 )
-array = np.array([[1, 2, 3], [1, 2, 3]])
+array = np.array(
+    [[1, 2, 3], [1, 2, 3]]
+)
 Storage.save(obj=array, location=location)
 
+image = Image.open("path/to/image.png")  # accepted also extension .jpg
+location = (
+    StorageLocationBuilder()
+        .set_bucket(bucket=BUCKET_NAME)
+        .set_blob_name(blob_name="folder_a/data.png")
+        .build()
+)
+
+Storage.save(obj=image, location=location)
+image = Image.open(
+    io.BytesIO(
+        Storage.get(location=location)
+    )
+)
 ```
 
 ## Contributions and development

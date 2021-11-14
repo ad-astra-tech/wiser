@@ -7,5 +7,7 @@ set -evx
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 MAIN_DIR="${SCRIPT_DIR}/../package"
 
+cd ${MAIN_DIR}
+
 python setup.py sdist
 twine upload dist/*

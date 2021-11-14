@@ -2,4 +2,4 @@ from wiser.gcloud.services.ai_platform.prediction.ai_platform_prediction_service
     AIPlatformPrediction,
 )
 
-__all__ = ['AIPlatformPrediction']
+__all__ = ["AIPlatformPrediction"]
