@@ -6,7 +6,7 @@ CURRENT_DIR = Path(__file__).parent
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-requirements=[
+requirements = [
     "numpy>=1.20.0",
     "google-cloud-storage>=1.42.0",
 ]

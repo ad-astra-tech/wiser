@@ -28,7 +28,9 @@ class Storage:
             tmp_file.seek(0)
             return np.load(tmp_file)
 
-        elif location.filename.endswith(FileExtension.JPG) or location.filename.endswith(FileExtension.PNG) :
+        elif location.filename.endswith(
+            FileExtension.JPG
+        ) or location.filename.endswith(FileExtension.PNG):
             tmp_file = NamedTemporaryFile()
             StorageConnector.download_to_filename(
                 filename=tmp_file.name,
@@ -65,7 +67,9 @@ class Storage:
             )
             tmp_file.close()
 
-        elif location.filename.endswith(FileExtension.JPG) or location.filename.endswith(FileExtension.PNG):
+        elif location.filename.endswith(
+            FileExtension.JPG
+        ) or location.filename.endswith(FileExtension.PNG):
             tmp_file = NamedTemporaryFile()
             tmp_file.name = location.filename
             obj.save(tmp_file)

@@ -30,10 +30,7 @@ location = (
 Storage.save(obj=np.array([[1, 2, 3], [1, 2, 3]]), location=location)
 
 # JSON
-data = {
-    "key_1": "value_1",
-    "key_2": "value_2"
-}
+data = {"key_1": "value_1", "key_2": "value_2"}
 location = (
     StorageLocationBuilder()
     .set_bucket(bucket=BUCKET_NAME)
@@ -53,7 +50,4 @@ location = (
     .build()
 )
 
-Storage.save(
-    obj=image,
-    location=location
-)
+Storage.save(obj=image, location=location)
