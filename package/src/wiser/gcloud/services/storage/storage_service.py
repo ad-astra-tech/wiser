@@ -28,6 +28,16 @@ class Storage:
             tmp_file.seek(0)
             return np.load(tmp_file)
 
+        elif location.filename.endswith(FileExtension.JPG) or location.filename.endswith(FileExtension.PNG) :
+            tmp_file = NamedTemporaryFile()
+            StorageConnector.download_to_filename(
+                filename=tmp_file.name,
+                bucket_name=location.bucket,
+                source_blob_name=location.blob_name,
+            )
+            tmp_file.seek(0)
+            return np.load(tmp_file)
+
         elif location.filename.endswith(FileExtension.JSON):
             data = StorageConnector.download_as_string(
                 bucket_name=location.bucket, source_blob_name=location.blob_name
@@ -47,6 +57,18 @@ class Storage:
         if location.filename.endswith(FileExtension.NUMPY):
             tmp_file = TemporaryFile()
             np.save(tmp_file, obj)
+            tmp_file.seek(0)
+            StorageConnector.upload_from_file(
+                tmp_file,
+                bucket_name=location.bucket,
+                destination_blob_name=location.blob_name,
+            )
+            tmp_file.close()
+
+        elif location.filename.endswith(FileExtension.JPG) or location.filename.endswith(FileExtension.PNG):
+            tmp_file = NamedTemporaryFile()
+            tmp_file.name = location.filename
+            obj.save(tmp_file)
             tmp_file.seek(0)
             StorageConnector.upload_from_file(
                 tmp_file,
