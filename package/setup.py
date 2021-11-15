@@ -8,7 +8,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 requirements = [
     "numpy>=1.20.0",
-    "google-cloud-storage>=1.42.0",
+    "google-cloud-storage>=1.42.0",     # Google Cloud Storage
+    "google-api-python-client>=2.30.0"  # for AI Platform prediction, Google recommends specific libraries
 ]
 
 setuptools.setup(
