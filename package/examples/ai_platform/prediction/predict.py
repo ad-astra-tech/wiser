@@ -9,13 +9,10 @@ MODEL_NAME = os.getenv("MODEL_NAME")
 body = dict(
     instances=[
         dict(input="This is the first sentence..."),
-        dict(input="... and this is the second sentence")
+        dict(input="... and this is the second sentence"),
     ]
 )
 
 predictions = AIPlatform.prediction.predict(
-    project_id=PROJECT_ID,
-    endpoint=ENDPOINT,
-    model_name=MODEL_NAME,
-    body=body
+    project_id=PROJECT_ID, endpoint=ENDPOINT, model_name=MODEL_NAME, body=body
 )
