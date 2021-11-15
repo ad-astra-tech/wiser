@@ -66,6 +66,29 @@ image = Image.open(
 )
 ```
 
+#### AI Platform
+At this time is supported only the `prediction` API of `AI Platform`. When building the body it's important to respect
+model signature. More information [here](https://blog.tensorflow.org/2021/03/a-tour-of-savedmodel-signatures.html).
+```python
+import os
+from wiser.gcloud.services.ai_platform import AIPlatform
+
+# Body depends on the signature of your model
+body = dict(
+    instances=[
+        dict(input="This is the first sentence..."),
+        dict(input="... and this is the second sentence")
+    ]
+)
+
+predictions = AIPlatform.prediction.predict(
+    project_id="PROJECT_ID",
+    endpoint="ENDPOINT",
+    model_name="MODEL_NAME",
+    body=body
+)
+```
+
 ## Contributions and development
 
 ### Contributions
