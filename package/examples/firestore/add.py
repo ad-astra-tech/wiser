@@ -6,7 +6,9 @@ from wiser.gcloud.types.firestore import (
 
 data = {"key_1": "value_1", "key_2": "value_2"}
 collection = FirestoreCollectionBuilder().set_path(path="collection_path").build()
-document = FirestoreDocumentBuilder().set_data(data=data).build()
+document = (
+    FirestoreDocumentBuilder().set_id(id="my_custom_id").set_data(data=data).build()
+)
 Firestore.add(collection=collection, document=document)
 
 data = {
