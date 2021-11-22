@@ -1,16 +1,23 @@
-from google.cloud import firestore
+from typing import Dict, Union
 
-from wiser.gcloud.types.firestore.collection import FirestoreCollection
-from wiser.gcloud.types.firestore.document import FirestoreDocument
+from google.cloud import firestore
 
 
 class FirestoreConnector:
-    def add(self, collection: FirestoreCollection, document: FirestoreDocument) -> None:
+    @staticmethod
+    def add(
+        collection_path: str,
+        document_id: str,
+        data: Dict[Union[str, int], Union[Dict, int, str, float]],
+    ) -> None:
         """
         Adds a document to a collection
-        :param collection: a firestore collection
-        :param document: a firestore document
+        :param collection_path: the firestore collection path
+        :param document_id: the firestore document id
+        :param data: the content of the document
         :return: None
         """
 
-        firestore.Client().collection(collection.path).document(document_id=document.id)
+        firestore.Client().collection(collection_path).document(
+            document_id=document_id
+        ).set(document_data=data)
