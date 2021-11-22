@@ -3,11 +3,11 @@ from __future__ import annotations
 
 class FirestoreCollection:
     def __init__(self, path: str):
-        self.path = path
+        self._path = path
 
     @property
     def path(self) -> str:
-        return self.path
+        return self._path
 
 
 class FirestoreCollectionBuilder:

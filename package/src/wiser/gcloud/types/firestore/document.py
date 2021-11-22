@@ -64,8 +64,6 @@ class FirestoreDocumentBuilder:
         return self
 
     def build(self) -> FirestoreDocument:
-        if self._id is None:
-            raise ValueError("Document id not set")
         if self._data is None:
             raise ValueError("Document data not set")
 
