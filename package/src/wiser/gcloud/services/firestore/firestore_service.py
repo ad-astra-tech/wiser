@@ -12,11 +12,11 @@ class Firestore:
         :param document: the firestore document
         :return: None
         """
-        if type(collection) is not type(FirestoreCollection):
+        if not isinstance(collection, FirestoreCollection):
             raise TypeError(
                 "Passed parameter 'collection' is not a 'FirestoreCollection'"
             )
-        if type(document) is not type(FirestoreDocument):
+        if not isinstance(document, FirestoreDocument):
             raise TypeError("Passed parameter 'document' is not a 'FirestoreDocument'")
 
         FirestoreConnector.add(
