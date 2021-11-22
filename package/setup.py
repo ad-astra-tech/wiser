@@ -9,6 +9,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 requirements = [
     "numpy>=1.20.0",
     "google-cloud-storage>=1.42.0",
+    "google-cloud-firestore>=2.3.0"
 ]
 
 setuptools.setup(
