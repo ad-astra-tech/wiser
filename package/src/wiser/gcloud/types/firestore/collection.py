@@ -21,5 +21,10 @@ class FirestoreCollectionBuilder:
 
     def build(self) -> FirestoreCollection:
         if self._collection_name is None:
-            raise ValueError("Firestore path not set")
+            raise ValueError("Collection name must be a string of length > 1")
+        if not isinstance(self._collection_name, str):
+            raise ValueError("Collection name must be a string of length > 1")
+        if len(self._collection_name) == 0:
+            raise ValueError("Collection name must be a string of length > 1")
+
         return FirestoreCollection(collection_name=self._collection_name)
