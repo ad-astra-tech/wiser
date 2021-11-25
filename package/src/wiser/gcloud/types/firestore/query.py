@@ -56,6 +56,44 @@ class FirestoreQueryBuilder:
         self._order_by = None
         self._direction = None
 
+    def __validate(self) -> None:
+        """
+        Performs data validation
+        :return: None
+        """
+        # conditions
+        for condition in self._conditions:
+            (left_hand_side, condition_operator, right_hand_side) = condition
+
+            if not isinstance(left_hand_side, str):
+                raise ValueError("Left hand side of a condition must be a string")
+
+            if not isinstance(condition_operator, str) and not isinstance(
+                condition_operator, FirestoreQueryCondition
+            ):
+                raise ValueError(
+                    "Condition operator must be a string or a FirestoreQueryCondition"
+                )
+            if isinstance(condition_operator, str) and not condition_operator in [
+                op.value for op in FirestoreQueryCondition
+            ]:
+                raise ValueError(
+                    "Condition operator string must match one of the values of FirestoreQueryOperator"
+                )
+        # direction
+        if (
+            self._direction is not None
+            and not isinstance(self._direction, str)
+            and not isinstance(self._direction, FirestoreQueryDirection)
+        ):
+            raise ValueError("Direction must be string or FirestoreQueryDirection")
+
+        # limit
+        if not isinstance(self._limit, int):
+            raise ValueError("Limit must be an integer")
+        if self._limit < 0:
+            raise ValueError("Limit must be greater or equal to zero")
+
     def add_condition(
         self,
         left_hand_side: str,
@@ -63,26 +101,11 @@ class FirestoreQueryBuilder:
         right_hand_side: Any,
     ) -> FirestoreQueryBuilder:
 
-        if not isinstance(left_hand_side, str):
-            raise ValueError("Left hand side operator accepts only strings")
-        if not isinstance(condition, str) and not isinstance(
-            condition, FirestoreQueryCondition
-        ):
-            raise ValueError(
-                "Condition operator accepts only strings or FirestoreQueryCondition"
-            )
-
-        condition_str = condition
-        if isinstance(condition, FirestoreQueryCondition):
-            condition_str = condition.value
-
-        self._conditions.append((left_hand_side, condition_str, right_hand_side))
+        self._conditions.append((left_hand_side, condition, right_hand_side))
 
         return self
 
     def add_limit(self, limit: int) -> FirestoreQueryBuilder:
-        if not isinstance(limit, int):
-            raise ValueError("Limit must be an integer")
 
         self._limit = limit
         return self
@@ -95,20 +118,18 @@ class FirestoreQueryBuilder:
     def add_direction(
         self, direction: Union[str, FirestoreQueryDirection]
     ) -> FirestoreQueryBuilder:
-        if not isinstance(direction, str) and not isinstance(
-            direction, FirestoreQueryDirection
-        ):
-            raise ValueError("Direction must be string or FirestoreQueryDirection")
 
         direction_str = direction
         if isinstance(direction, FirestoreQueryDirection):
             direction_str = direction.value
 
-        self._direction = direction
+        self._direction = direction_str
 
         return self
 
     def build(self) -> FirestoreQuery:
+        self.__validate()
+
         return FirestoreQuery(
             conditions=self._conditions,
             limit=self._limit,
