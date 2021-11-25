@@ -22,7 +22,7 @@ extra_requirements["all"] = all_extra_requirements
 
 setuptools.setup(
     name="wiser",
-    version="0.0.4",
+    version="0.1.0",
     author="Nicola Massarenti",
     author_email="nicola.massarenti@gmail.com",
     description="A python package designed to free the developers from the burden of common operations with cloud technologies.",
