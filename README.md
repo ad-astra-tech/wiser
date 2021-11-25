@@ -13,7 +13,12 @@ underlying infrastructure layer, of the client connections or the data managemen
 
 ### Installation
 
-_Wiser_ can be installed by running `pip install wiser`. It requires Python 3.8+.
+_Wiser_ is published on [`PyPi`](https://pypi.org/project/wiser/). It requires Python 3.8+.
+
+To install _Wiser_ with:
+* Google Cloud Storage: `pip install 'wiser[storage]'`
+* Google Cloud Firestore: `pip install 'wiser[firestore]'`
+* Complete version: `pip install 'wiser[all]'`
 
 ### Usage
 _Wiser_ comes with several examples: you can find them in the [examples folder](https://github.com/nicolamassarenti/wiser/tree/main/package/examples/). A brief examples of the services currently supported is shown in the following.
