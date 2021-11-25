@@ -8,9 +8,17 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 requirements = [
     "numpy>=1.20.0",
-    "google-cloud-storage>=1.42.0",
-    "google-cloud-firestore>=2.3.0",
 ]
+extra_requirements = dict(
+    storage=[
+        "google-cloud-storage>=1.42.0",
+    ],
+    firestore=[
+        "google-cloud-firestore>=2.3.0",
+    ]
+)
+all_extra_requirements = [item for key, value in extra_requirements.items() for item in extra_requirements[key] ]
+extra_requirements["all"] = all_extra_requirements
 
 setuptools.setup(
     name="wiser",
@@ -30,6 +38,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
+    extras_require=extra_requirements,
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.8",
