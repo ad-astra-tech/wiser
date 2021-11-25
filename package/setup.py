@@ -15,9 +15,13 @@ extra_requirements = dict(
     ],
     firestore=[
         "google-cloud-firestore>=2.3.0",
-    ]
+    ],
 )
-all_extra_requirements = [item for key, value in extra_requirements.items() for item in extra_requirements[key] ]
+all_extra_requirements = [
+    item
+    for key, value in extra_requirements.items()
+    for item in extra_requirements[key]
+]
 extra_requirements["all"] = all_extra_requirements
 
 setuptools.setup(
