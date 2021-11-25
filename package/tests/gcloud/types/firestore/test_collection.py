@@ -26,7 +26,6 @@ class FirestoreCollectionBuilderTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             FirestoreCollectionBuilder().set_collection_name(collection_name="").build()
 
-
     def test_collection_name_int_raise_value_error(self):
         """
         GIVEN the FirestoreCollectionBuilder

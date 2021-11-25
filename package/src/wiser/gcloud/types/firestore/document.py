@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-from typing import Union, Dict
+from typing import Union, Dict, Any
 from copy import deepcopy
 
 
 class FirestoreDocument:
-    def __init__(
-        self, id: str, data: Dict[Union[str, int], Union[Dict, int, str, float]]
-    ):
+    def __init__(self, id: str, data: Dict[Union[str, int], Any]):
         self._id = id
         self._data = data
 
@@ -16,7 +14,7 @@ class FirestoreDocument:
         return self._id
 
     @property
-    def data(self) -> Dict[Union[str, int], Union[Dict, int, str, float]]:
+    def data(self) -> Dict[Union[str, int], Any]:
         return self._data
 
 
@@ -25,6 +23,25 @@ class FirestoreDocumentBuilder:
         self._id = None
 
         self._data = None
+
+    def __validate(self) -> None:
+        """
+        Performs data validation
+        :return: None
+        """
+        if self._id is not None and not isinstance(self._id, str):
+            raise ValueError("Parameter 'id' must be a string")
+
+        if self._data is None:
+            raise ValueError("Document data not set")
+        elif not isinstance(self._data, dict):
+            raise ValueError("Document data must be a dict")
+        else:
+            for key, _ in self._data.items():
+                if not isinstance(key, int) and not isinstance(key, str):
+                    raise ValueError(
+                        "Keys of first level of data must be integers or strings"
+                    )
 
     def set_id(self, id: str) -> FirestoreDocumentBuilder:
         """
@@ -36,7 +53,7 @@ class FirestoreDocumentBuilder:
         return self
 
     def add_property(
-        self, key: Union[str, int], value: Union[Dict, int, str, float]
+        self, key: Union[str, int], value: Any
     ) -> FirestoreDocumentBuilder:
         """
         Adds a property to the document
@@ -51,9 +68,7 @@ class FirestoreDocumentBuilder:
 
         return self
 
-    def set_data(
-        self, data: Dict[Union[str, int], Union[Dict, int, str, float]]
-    ) -> FirestoreDocumentBuilder:
+    def set_data(self, data: Dict[Union[str, int], Any]) -> FirestoreDocumentBuilder:
         """
         Sets the document.
         :param content: the content of the document
@@ -64,7 +79,6 @@ class FirestoreDocumentBuilder:
         return self
 
     def build(self) -> FirestoreDocument:
-        if self._data is None:
-            raise ValueError("Document data not set")
+        self.__validate()
 
         return FirestoreDocument(id=self._id, data=self._data)
