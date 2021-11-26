@@ -89,10 +89,11 @@ class FirestoreQueryBuilder:
             raise ValueError("Direction must be string or FirestoreQueryDirection")
 
         # limit
-        if not isinstance(self._limit, int):
-            raise ValueError("Limit must be an integer")
-        if self._limit < 0:
-            raise ValueError("Limit must be greater or equal to zero")
+        if self._limit is not None:
+            if not isinstance(self._limit, int):
+                raise ValueError("Limit must be an integer")
+            if self._limit < 0:
+                raise ValueError("Limit must be greater or equal to zero")
 
     def add_condition(
         self,

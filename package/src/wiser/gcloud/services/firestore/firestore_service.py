@@ -16,11 +16,11 @@ class Firestore:
         :return: None
         """
         if not isinstance(collection, FirestoreCollection):
-            raise TypeError(
+            raise ValueError(
                 "Passed parameter 'collection' is not a 'FirestoreCollection'"
             )
         if not isinstance(document, FirestoreDocument):
-            raise TypeError("Passed parameter 'document' is not a 'FirestoreDocument'")
+            raise ValueError("Passed parameter 'document' is not a 'FirestoreDocument'")
 
         FirestoreConnector.add(
             collection_path=collection.collection_name,
@@ -37,11 +37,11 @@ class Firestore:
         :return: None
         """
         if not isinstance(collection, FirestoreCollection):
-            raise TypeError(
+            raise ValueError(
                 "Passed parameter 'collection' is not a 'FirestoreCollection'"
             )
         if not isinstance(document, FirestoreDocument):
-            raise TypeError("Passed parameter 'document' is not a 'FirestoreDocument'")
+            raise ValueError("Passed parameter 'document' is not a 'FirestoreDocument'")
 
         if document.id is None:
             raise ValueError("No document id provided")
@@ -63,11 +63,11 @@ class Firestore:
         :return:
         """
         if not isinstance(collection, FirestoreCollection):
-            raise TypeError(
+            raise ValueError(
                 "Passed parameter 'collection' is not a 'FirestoreCollection'"
             )
         if not isinstance(query, FirestoreQuery):
-            raise TypeError("Passed parameter 'query' is not a 'FirestoreQuery'")
+            raise ValueError("Passed parameter 'query' is not a 'FirestoreQuery'")
 
         return FirestoreConnector.get(
             collection_name=collection.collection_name,
