@@ -13,7 +13,12 @@ underlying infrastructure layer, of the client connections or the data managemen
 
 ### Installation
 
-_Wiser_ can be installed by running `pip install wiser`. It requires Python 3.8+.
+_Wiser_ is published on [`PyPi`](https://pypi.org/project/wiser/). It requires Python 3.8+.
+
+To install _Wiser_ with:
+* Google Cloud Storage: `pip install 'wiser[storage]'`
+* Google Cloud Firestore: `pip install 'wiser[firestore]'`
+* Complete version: `pip install 'wiser[all]'`
 
 ### Usage
 _Wiser_ comes with several examples: you can find them in the [examples folder](https://github.com/nicolamassarenti/wiser/tree/main/package/examples/). A brief examples of the services currently supported is shown in the following.
@@ -65,6 +70,66 @@ image = Image.open(
     )
 )
 ```
+
+#### Google Cloud Firestore
+
+```python
+from wiser.gcloud.services import Firestore
+from wiser.gcloud.types.firestore import (
+    FirestoreDocumentBuilder,
+    FirestoreCollectionBuilder,
+)
+# Add a document
+COLLECTION_NAME = "collection_name"
+data = {
+    "key_1": "value_1",
+    "key_2": "xxxx",
+    "key_3": {"key_4": "value_4", "key_5": "value_6"},
+}
+collection = (
+    FirestoreCollectionBuilder()
+    .set_collection_name(collection_name=COLLECTION_NAME)
+    .build()
+)
+document = FirestoreDocumentBuilder()
+for key, value in data.items():
+    document.add_property(key=key, value=value)
+
+document = document.build()
+Firestore.add(collection=collection, document=document)
+
+# Get a document
+collection = (
+    FirestoreCollectionBuilder()
+    .set_collection_name(collection_name=COLLECTION_NAME)
+    .build()
+)
+query = (
+    FirestoreQueryBuilder()
+    .add_condition(
+        left_hand_side="key_1",
+        condition=FirestoreQueryCondition.EQUAL,
+        right_hand_side="value_1",
+    )
+    .add_condition(
+        left_hand_side="key_2",
+        condition=FirestoreQueryCondition.EQUAL,
+        right_hand_side="xxxx",
+    )
+    .add_condition(
+        left_hand_side="key_3.key_5",
+        condition=FirestoreQueryCondition.EQUAL,
+        right_hand_side="value_6",
+    )
+    .add_limit(limit=10)
+    .add_direction(direction=FirestoreQueryDirection.ASCENDING)
+    .build()
+)
+documents = Firestore.get(collection=collection, query=query)
+for document in documents:
+    print(document)
+```
+
 
 ## Contributions and development
 
