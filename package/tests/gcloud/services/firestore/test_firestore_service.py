@@ -182,9 +182,6 @@ class TestFirestoreService(unittest.TestCase):
             Firestore.get(collection=collection_name, query=query)
 
         with self.assertRaises(ValueError):
-            Firestore.get(collection=collection, query=query)
-
-        with self.assertRaises(ValueError):
             Firestore.get(collection=collection_name, query=left_hand_side)
 
     @patch(
