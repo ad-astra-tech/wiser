@@ -113,12 +113,20 @@ class FirestoreQueryBuilderTest(unittest.TestCase):
         from wiser.gcloud.types.firestore.query import (
             FirestoreQueryBuilder,
             FirestoreQueryDirection,
+            FirestoreQueryCondition,
         )
 
         conditions = [
             ("key_1", "==", "value_1"),
             ("key_2", "!=", "value_2"),
             ("key_3", ">=", "value_3"),
+            ("key_3", FirestoreQueryCondition.LOWER, "value_3"),
+        ]
+        str_conditions = [
+            ("key_1", "==", "value_1"),
+            ("key_2", "!=", "value_2"),
+            ("key_3", ">=", "value_3"),
+            ("key_3", FirestoreQueryCondition.LOWER.value, "value_3"),
         ]
         limit = 10
         order_by = "key_2"
@@ -137,7 +145,12 @@ class FirestoreQueryBuilderTest(unittest.TestCase):
 
         query = query.build()
 
-        self.assertEqual(query.conditions, conditions)
+        self.assertEqual(query.conditions, str_conditions)
+        for condition in query.conditions:
+            self.assertIsInstance(condition[0], str)
+            self.assertIsInstance(condition[1], str)
+            self.assertIsInstance(condition[2], str)
+
         self.assertEqual(query.limit, limit)
         self.assertEqual(query.order_by, order_by)
         self.assertEqual(query.direction, direction.value)

@@ -131,8 +131,15 @@ class FirestoreQueryBuilder:
     def build(self) -> FirestoreQuery:
         self.__validate()
 
+        conditions = []
+        for _idx, condition in enumerate(self._conditions):
+            if isinstance(condition[1], FirestoreQueryCondition):
+                conditions.append((condition[0], condition[1].value, condition[2]))
+            else:
+                conditions.append(condition)
+
         return FirestoreQuery(
-            conditions=self._conditions,
+            conditions=conditions,
             limit=self._limit,
             order_by=self._order_by,
             direction=self._direction,
