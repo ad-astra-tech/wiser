@@ -150,7 +150,7 @@ used [`coverage`](https://coverage.readthedocs.io/en/6.1.2/).
 
 To run unit tests execute:
 ```shell
-coverage run -m --source src/  unittest discover
+coverage run -m --source src/  unittest discover -v
 ```
 And to read the coverage report:
 ```shell
