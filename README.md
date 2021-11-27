@@ -113,13 +113,13 @@ query = (
     )
     .add_condition(
         left_hand_side="key_2",
-        condition=FirestoreQueryCondition.EQUAL,
+        condition=FirestoreQueryCondition.NOT_EQUAL,
         right_hand_side="xxxx",
     )
     .add_condition(
         left_hand_side="key_3.key_5",
-        condition=FirestoreQueryCondition.EQUAL,
-        right_hand_side="value_6",
+        condition=FirestoreQueryCondition.GREATER,
+        right_hand_side=6,
     )
     .add_limit(limit=10)
     .add_direction(direction=FirestoreQueryDirection.ASCENDING)
@@ -150,7 +150,7 @@ used [`coverage`](https://coverage.readthedocs.io/en/6.1.2/).
 
 To run unit tests execute:
 ```shell
-coverage run -m --source src/  unittest discover
+coverage run -m --source src/  unittest discover -v
 ```
 And to read the coverage report:
 ```shell
