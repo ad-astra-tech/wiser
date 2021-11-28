@@ -8,7 +8,7 @@ class FirestoreCollectionBuilderTest(unittest.TestCase):
         WHEN a None is passed as a collection name
         THEN value error is raised
         """
-        from wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
+        from wiser.wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
 
         with self.assertRaises(ValueError):
             FirestoreCollectionBuilder().set_collection_name(
@@ -21,7 +21,7 @@ class FirestoreCollectionBuilderTest(unittest.TestCase):
         WHEN a collection name of zero length is set
         THEN value error is raised
         """
-        from wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
+        from wiser.wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
 
         with self.assertRaises(ValueError):
             FirestoreCollectionBuilder().set_collection_name(collection_name="").build()
@@ -32,7 +32,7 @@ class FirestoreCollectionBuilderTest(unittest.TestCase):
         WHEN an int is passed as collection_name
         THEN value error is raised
         """
-        from wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
+        from wiser.wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
 
         with self.assertRaises(ValueError):
             FirestoreCollectionBuilder().set_collection_name(collection_name=12).build()
@@ -43,7 +43,7 @@ class FirestoreCollectionBuilderTest(unittest.TestCase):
         WHEN  the properties are invoked
         THEN the defined types are returned
         """
-        from wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
+        from wiser.wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
 
         collection = (
             FirestoreCollectionBuilder()
