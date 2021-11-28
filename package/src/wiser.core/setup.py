@@ -25,7 +25,7 @@ all_extra_requirements = [
 extra_requirements["all"] = all_extra_requirements
 
 setuptools.setup(
-    name="wiser",
+    name="wiser-core",
     version="0.1.2",
     author="Nicola Massarenti",
     author_email="nicola.massarenti@gmail.com",
