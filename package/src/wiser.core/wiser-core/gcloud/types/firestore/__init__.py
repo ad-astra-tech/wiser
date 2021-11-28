@@ -1,10 +1,5 @@
 from wiser.gcloud.types.firestore.document import FirestoreDocumentBuilder
-from wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
-from wiser.gcloud.types.firestore.query import (
-    FirestoreQueryBuilder,
-    FirestoreQueryCondition,
-    FirestoreQueryDirection,
-)
+from wiser.wiser.gcloud.types.firestore.collection import FirestoreCollectionBuilder
 
 __all__ = [
     "FirestoreDocumentBuilder",

@@ -1,7 +1,7 @@
 from typing import List, Dict, Any
 
 from wiser.gcloud.connectors.firestore.firestore_connector import FirestoreConnector
-from wiser.gcloud.types.firestore.collection import FirestoreCollection
+from wiser.wiser.gcloud.types.firestore.collection import FirestoreCollection
 from wiser.gcloud.types.firestore.document import FirestoreDocument
 from wiser.gcloud.types.firestore.query import FirestoreQuery
 
