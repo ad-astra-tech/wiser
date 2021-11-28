@@ -3,34 +3,36 @@ from pathlib import Path
 
 CURRENT_DIR = Path(__file__).parent
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+# Package metadata
+name = "wiser-core",
+version = "0.0.1",
+author = "Nicola Massarenti",
+author_email = "nicola.massarenti@gmail.com",
+description = "Core functionalities of `wiser`",
 
+# Requirements, dependencies and namespaces
 requirements = [
-    "numpy>=1.20.0",
 ]
-extra_requirements = dict(
-    storage=[
-        "google-cloud-storage>=1.42.0",
-    ],
-    firestore=[
-        "google-cloud-firestore>=2.3.0",
-    ],
-)
-all_extra_requirements = [
-    item
-    for key, value in extra_requirements.items()
-    for item in extra_requirements[key]
+extra_requirements = dict()
+dependencies = [
 ]
-extra_requirements["all"] = all_extra_requirements
+# Only include packages under the 'wiser' namespace. Do not include tests,
+# benchmarks, etc.
+packages = [
+    package for package in setuptools.find_packages() if package.startswith("wiser")
+]
+namespaces = ["wiser"]
+if "wiser.core" in packages:
+    namespaces.append("wiser.core")
 
+# Setup
 setuptools.setup(
-    name="wiser-core",
-    version="0.1.2",
-    author="Nicola Massarenti",
-    author_email="nicola.massarenti@gmail.com",
-    description="A python package designed to free the developers from the burden of common operations with cloud technologies.",
-    long_description=long_description,
+    name=name,
+    version=version,
+    author=author,
+    author_email=author_email,
+    description=description,
+    long_description=None,
     long_description_content_type="text/markdown",
     url="https://github.com/nicolamassarenti/wiser",
     project_urls={
@@ -43,6 +45,7 @@ setuptools.setup(
     ],
     install_requires=requirements,
     extras_require=extra_requirements,
+    namespace_packages=namespaces,
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.8",
