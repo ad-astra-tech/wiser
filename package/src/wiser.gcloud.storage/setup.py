@@ -8,7 +8,7 @@ name = "wiser-gcloud-storage",
 version = "0.0.1",
 author = "Nicola Massarenti",
 author_email = "nicola.massarenti@gmail.com",
-description = "A python package that wraps Google Cloud Storage services.",
+description = "A `wiser` python package that wraps Google Cloud Storage services.",
 
 # Requirements and dependencies
 requirements = [
