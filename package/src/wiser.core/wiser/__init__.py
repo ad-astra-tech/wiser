@@ -1,4 +1,3 @@
-
 try:
     import pkg_resources
 

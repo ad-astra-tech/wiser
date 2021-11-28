@@ -11,11 +11,9 @@ author_email = "nicola.massarenti@gmail.com"
 description = "Core functionalities of `wiser`"
 
 # Requirements, dependencies and namespaces
-requirements = [
-]
+requirements = []
 extra_requirements = dict()
-dependencies = [
-]
+dependencies = []
 # Only include packages under the 'wiser' namespace. Do not include tests,
 # benchmarks, etc.
 packages = [
