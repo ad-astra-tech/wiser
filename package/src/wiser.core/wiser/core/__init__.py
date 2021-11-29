@@ -6,3 +6,7 @@ except ImportError:
     import pkgutil
 
     __path__ = pkgutil.extend_path(__path__, __name__)
+
+from wiser.core.types.extensions import FileExtension
+
+__all__ = ["FileExtension"]
