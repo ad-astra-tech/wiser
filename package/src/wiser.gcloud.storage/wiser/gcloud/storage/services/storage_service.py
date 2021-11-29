@@ -4,9 +4,12 @@ from tempfile import TemporaryFile, NamedTemporaryFile
 
 import numpy as np
 
-from wiser.gcloud.connectors.storage import StorageConnector
-from wiser.gcloud.types.storage.location import StorageLocation, StorageLocationBuilder
-from wiser.core.types.data.extensions import FileExtension
+from wiser.gcloud.storage.connectors.storage_connector import StorageConnector
+from wiser.gcloud.storage.types.storage_location import (
+    StorageLocation,
+    StorageLocationBuilder,
+)
+from wiser.core.types.extensions import FileExtension
 
 
 class Storage:
