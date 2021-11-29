@@ -4,22 +4,26 @@ from pathlib import Path
 CURRENT_DIR = Path(__file__).parent
 
 # Package metadata
-name = ("wiser-gcloud-storage",)
-version = ("0.0.1",)
-author = ("Nicola Massarenti",)
-author_email = ("nicola.massarenti@gmail.com",)
-description = ("A `wiser` python package that wraps Google Cloud Storage services.",)
+name = "wiser-gcloud-storage"
+version = "0.0.1"
+author = "Nicola Massarenti"
+author_email = "nicola.massarenti@gmail.com"
+description = "Google Cloud Storage functionalities for `wiser`"
 
-# Requirements and dependencies
-requirements = [
-    "numpy>=1.20.0",
-    "google-cloud-storage>=1.42.0",
-]
+# Requirements, dependencies and namespaces
+requirements = []
 extra_requirements = dict()
-
-dependencies = [
-    "wiser-core",
+dependencies = []
+# Only include packages under the 'wiser' namespace. Do not include tests,
+# benchmarks, etc.
+packages = [
+    package for package in setuptools.find_packages() if package.startswith("wiser")
 ]
+namespaces = ["wiser"]
+if "wiser.gcloud" in packages:
+    namespaces.append("wiser.gcloud")
+if "wiser.gcloud.storage" in packages:
+    namespaces.append("wiser.gcloud.storage")
 
 # Setup
 setuptools.setup(
@@ -41,7 +45,10 @@ setuptools.setup(
     ],
     install_requires=requirements,
     extras_require=extra_requirements,
-    package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    namespace_packages=namespaces,
+    packages=packages,
     python_requires=">=3.8",
+    platforms="Posix; MacOS X; Windows",
+    include_package_data=True,
+    zip_safe=False,
 )
