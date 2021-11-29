@@ -11,9 +11,8 @@ author_email = "nicola.massarenti@gmail.com"
 description = "Google Cloud Storage functionalities for `wiser`"
 
 # Requirements, dependencies and namespaces
-requirements = ["wiser-core", "numpy"]
 extra_requirements = dict()
-dependencies = []
+dependencies = ["wiser-core", "numpy"]
 # Only include packages under the 'wiser' namespace. Do not include tests,
 # benchmarks, etc.
 packages = [
@@ -43,7 +42,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=requirements,
+    install_requires=dependencies,
     extras_require=extra_requirements,
     namespace_packages=namespaces,
     packages=packages,

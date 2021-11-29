@@ -11,9 +11,8 @@ author_email = "nicola.massarenti@gmail.com"
 description = "Core functionalities of `wiser`"
 
 # Requirements, dependencies and namespaces
-requirements = ["numpy"]
 extra_requirements = dict()
-dependencies = []
+dependencies = ["numpy"]
 # Only include packages under the 'wiser' namespace. Do not include tests,
 # benchmarks, etc.
 packages = [
@@ -41,7 +40,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=requirements,
+    install_requires=dependencies,
     extras_require=extra_requirements,
     namespace_packages=namespaces,
     packages=packages,
