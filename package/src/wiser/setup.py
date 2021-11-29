@@ -11,8 +11,10 @@ author_email = "nicola.massarenti@gmail.com"
 description = "Wraps cloud services wisely"
 
 # Requirements, dependencies and namespaces
-requirements = []
-extra_requirements = dict()
+requirements = ["wiser-core"]
+extra_requirements = dict(
+    storage=["wiser-gcloud-storage"], firestore=["wiser-gcloud-firestore"]
+)
 dependencies = []
 # Only include packages under the 'wiser' namespace. Do not include tests,
 # benchmarks, etc.

@@ -11,7 +11,7 @@ author_email = "nicola.massarenti@gmail.com"
 description = "Google Cloud Firestore functionalities for `wiser`"
 
 # Requirements, dependencies and namespaces
-requirements = []
+requirements = ["wiser-core"]
 extra_requirements = dict()
 dependencies = []
 # Only include packages under the 'wiser' namespace. Do not include tests,
