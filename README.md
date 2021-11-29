@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/nicolamassarenti/wiser/dev/resources/logo.png" />
 </p>
-<h2 align="center">The cloud enabler</h2>
+<h2 align="center">Wraps cloud services wisely</h2>
 
 _Wiser_ is a python package designed to free the developers from the burden of common operations with cloud technologies.
 _Wiser_ gives you speed, effectiveness and allows you to truly focus on the application logic.
