@@ -24,12 +24,13 @@ To install _Wiser_ with:
 _Wiser_ comes with several examples: you can find them in the [examples folder](https://github.com/nicolamassarenti/wiser/tree/main/package/examples/). A brief examples of the services currently supported is shown in the following.
 
 #### Google Cloud Storage
-GCP Storage supported types are: `.txt`, `.json`, `.npy`, `.jpg` and `.png`. Below is shown some examples of the `get()` and `save()` APIs.
+GCP Storage supported types are: `.txt`, `.json`, `.npy`, `.jpg`, `.png` and `.pdf`. Below is shown some examples of the `get()` and `save()` APIs.
 
 ```python
 import io
 import os
 import numpy as np
+import PyPDF2
 from PIL import Image
 from wiser.gcloud.services.storage import Storage
 from wiser.gcloud.types.storage.location import StorageLocationBuilder
@@ -69,6 +70,16 @@ image = Image.open(
         Storage.get(location=location)
     )
 )
+
+pdf_path = "/path/to/file.pdf"
+location = (
+    StorageLocationBuilder()
+    .set_bucket(bucket=BUCKET_NAME)
+    .set_blob_name(blob_name="folder_a/data.pdf")
+    .build()
+)
+Storage.save(obj=pdf_path, location=location)
+pdf = PyPDF2.PdfFileReader(io.BytesIO(Storage.get(location=location)))
 ```
 
 #### Google Cloud Firestore
