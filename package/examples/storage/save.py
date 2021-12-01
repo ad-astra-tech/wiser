@@ -29,25 +29,12 @@ location = (
 )
 Storage.save(obj=np.array([[1, 2, 3], [1, 2, 3]]), location=location)
 
-# JSON
-data = {"key_1": "value_1", "key_2": "value_2"}
+# PDF location
+pdf_path = "/path/to/file.pdf"
 location = (
     StorageLocationBuilder()
     .set_bucket(bucket=BUCKET_NAME)
-    .set_blob_name(blob_name="folder_a/folder_c/data.json")
+    .set_blob_name(blob_name="folder_a/data.pdf")
     .build()
 )
-Storage.save(obj=data, location=location)
-
-# JPG, PNG
-image_path = os.environ["IMAGE_PATH"]
-image = Image.open(image_path)
-
-location = (
-    StorageLocationBuilder()
-    .set_bucket(bucket=BUCKET_NAME)
-    .set_blob_name(blob_name="folder_a/data.png")
-    .build()
-)
-
-Storage.save(obj=image, location=location)
+Storage.save(obj=pdf_path, location=location)

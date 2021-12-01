@@ -5,3 +5,4 @@ class FileExtension:
     NUMPY = ".npy"
     PNG = ".png"
     TEXT = ".txt"
+    PDF = ".pdf"
