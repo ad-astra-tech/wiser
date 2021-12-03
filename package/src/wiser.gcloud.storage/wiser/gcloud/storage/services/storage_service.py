@@ -29,7 +29,9 @@ class Storage:
                 source_blob_name=location.blob_name,
             )
             tmp_file.seek(0)
-            return np.load(tmp_file)
+            data = np.load(tmp_file)
+            tmp_file.close()
+            return data
 
         elif location.filename.endswith(
             FileExtension.JPG
@@ -45,6 +47,11 @@ class Storage:
             return json.loads(data)
         elif location.filename.endswith(FileExtension.TEXT):
             data = StorageConnector.download_as_string(
+                bucket_name=location.bucket, source_blob_name=location.blob_name
+            )
+            return data
+        elif location.filename.endswith(FileExtension.PDF):
+            data = StorageConnector.download_as_bytes(
                 bucket_name=location.bucket, source_blob_name=location.blob_name
             )
             return data
@@ -93,6 +100,13 @@ class Storage:
                 bucket_name=location.bucket,
                 destination_blob_name=location.blob_name,
             )
+        elif location.filename.endswith(FileExtension.PDF):
+            with open(obj, "rb") as f:
+                StorageConnector.upload_from_file(
+                    file_handle=f,
+                    bucket_name=location.bucket,
+                    destination_blob_name=location.blob_name,
+                )
         else:
             NotImplementedError("File extension not managed")
             return
