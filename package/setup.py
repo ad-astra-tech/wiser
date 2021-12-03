@@ -11,9 +11,10 @@ author_email = "nicola.massarenti@gmail.com"
 description = "Wraps cloud services wisely"
 
 # Requirements, dependencies and namespaces
-extra_requirements = dict(
-    storage=["wiser-gcloud-storage"], firestore=["wiser-gcloud-firestore"]
-)
+extra_requirements = {
+    "gcloud-storage":["wiser-gcloud-storage"],
+    "gcloud-firestore":["wiser-gcloud-firestore"],
+}
 dependencies = ["numpy"]
 # Only include packages under the 'wiser' namespace. Do not include tests,
 # benchmarks, etc.
