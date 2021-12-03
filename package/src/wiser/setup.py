@@ -4,14 +4,16 @@ from pathlib import Path
 CURRENT_DIR = Path(__file__).parent
 
 # Package metadata
-name = "wiser-core"
-version = "0.0.1"
+name = "wiser"
+version = "1.0.0"
 author = "Nicola Massarenti"
 author_email = "nicola.massarenti@gmail.com"
-description = "Core functionalities of `wiser`"
+description = "Wraps cloud services wisely"
 
 # Requirements, dependencies and namespaces
-extra_requirements = dict()
+extra_requirements = dict(
+    storage=["wiser-gcloud-storage"], firestore=["wiser-gcloud-firestore"]
+)
 dependencies = ["numpy"]
 # Only include packages under the 'wiser' namespace. Do not include tests,
 # benchmarks, etc.
@@ -19,8 +21,6 @@ packages = [
     package for package in setuptools.find_packages() if package.startswith("wiser")
 ]
 namespaces = ["wiser"]
-if "wiser.core" in packages:
-    namespaces.append("wiser.core")
 
 # Setup
 setuptools.setup(
