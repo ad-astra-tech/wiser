@@ -5,17 +5,17 @@ CURRENT_DIR = Path(__file__).parent
 
 # Package metadata
 name = "wiser"
-version = "1.0.0"
+version = "1.0.1"
 author = "Nicola Massarenti"
 author_email = "nicola.massarenti@gmail.com"
 description = "Wraps cloud services wisely"
 
 # Requirements, dependencies and namespaces
 extra_requirements = {
-    "gcloud-storage":["wiser-gcloud-storage"],
-    "gcloud-firestore":["wiser-gcloud-firestore"],
+    "gcloud-storage": ["wiser-gcloud-storage"],
+    "gcloud-firestore": ["wiser-gcloud-firestore"],
 }
-dependencies = ["numpy"]
+dependencies = []
 # Only include packages under the 'wiser' namespace. Do not include tests,
 # benchmarks, etc.
 packages = [
